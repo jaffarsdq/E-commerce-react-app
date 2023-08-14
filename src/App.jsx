@@ -1,9 +1,20 @@
 import './App.css'
-import Header from './Header/Header';
+
+//components import
+import Footer from './components/Footer/Footer'
+import Header from './components/Header/Header'
+
+//pages import
+import Home from './pages/home/home'
+
 
 function App() {
   return (
-    <Header/>
+    <>
+      <Header/>
+        <Home/>
+      <Footer/>
+    </>
   )
 }
 
