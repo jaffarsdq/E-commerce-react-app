@@ -5,14 +5,14 @@ import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 
 //pages import
-import Home from './pages/home/home'
+import MainRoutes from './routes/MainRoutes'
 
 
 function App() {
   return (
     <>
       <Header/>
-        <Home/>
+      <MainRoutes />
       <Footer/>
     </>
   )

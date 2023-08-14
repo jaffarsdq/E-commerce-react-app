@@ -2,13 +2,14 @@ import React from 'react'
 
 //css imports
 import './Header.css'
+import { Link } from 'react-router-dom'
 
 function Header() {
   return (
     <div className="header">
         <nav className="navbar navbar-expand-lg">
             <div className="container">
-                <a className="navbar-brand nav-brand" href="#"> <strong>S</strong>hoppy</a> 
+                <Link to={'/'} className="navbar-brand nav-brand" href="#"> <strong>S</strong>hoppy</Link> 
     
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon"></span>
