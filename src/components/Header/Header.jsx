@@ -16,16 +16,27 @@ function Header() {
                 </button>
     
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul className="navbar-nav ms-auto text-center">
-                    <li className="nav-item">
-                        <a className="nav-link cart" aria-current="page" href="#"><i className="bi bi-cart"></i> Cart</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link active fw-bold" href="#">Hi User</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Logout</a>
-                    </li> 
+                    <ul className="navbar-nav ms-auto text-center fw-semibold">
+                        <li className="nav-item">
+                            <a className="nav-link cart" aria-current="page" href="#"><i className="bi bi-cart"></i> Cart</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Options
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><hr class="dropdown-divider"/></li>
+                                <li>
+                                    <Link to={"/Login"} class="dropdown-item text-danger">
+                                    Logout
+                                    </Link>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Username</a>
+                        </li>
                     </ul>
                 </div>
             </div>
