@@ -6,9 +6,26 @@ import './productList.css'
 
 function ProductList() {
     return (
-        <div className="main container">
-            <div className="row  search-products-wrapper">
-                <FilterProducts/>
+        <div className="main container  mt-5">
+           <div class="row search-products-wrapper">
+                <FilterProducts/>    
+           </div>
+            <div class="row col-12  col-md-10 col-lg-9 product-list-box d-flex flex-wrap mx-auto" id="product-list">
+
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
+                <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
                 <ProductBox productImage={reactImg} name={'dummy'} price={100}/>
             </div>
         </div>

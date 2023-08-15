@@ -6,7 +6,7 @@ function FilterProducts() {
     const maxPriceOptions = [10, 20, 50, 100, 200, 1000];
 
   return (
-    <div className="col-10 col-md-10 col-lg-3 mx-auto">
+    <div className="col-10 col-md-10 col-lg-12  mx-auto search-products-wrapper">
         <div className="col">
             <h6 htmlFor="search-products" className="form-label text-muted">Search products</h6>
             <input type="text" className="form-control" placeholder="Search by name" id="search-products" aria-describedby="search-bar"/>

@@ -7,7 +7,7 @@ function CategoryItem({itemName}) {
   return (
     <div className="row product-list d-flex justify-content-center" 
         id="categories-list">
-        <Link to="/products" className="col-12 col-sm-6 col-md-4 col-lg-2 m-2  all-products">
+        <Link to="/products" className="col-9 col-sm-6 col-md-4 col-lg-2 m-2  all-products">
             {itemName}
         </Link>
     </div>

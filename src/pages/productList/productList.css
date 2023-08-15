@@ -1,5 +1,10 @@
-.search-products-wrapper {
-    position: sticky;
-    top: 20px;
-    height: 20vh;
-}
+@media (min-width: 769px) {
+    .search-products-wrapper {
+        position: sticky;
+        top: 20px;
+        height: 60vh;
+    }
+    .main {
+        display: flex;
+    }
+  }

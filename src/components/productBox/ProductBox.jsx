@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 import './productBox.css'
 
 function ProductBox({productImage, name, price}) {
-  return (
-    <div className="col-12  col-md-12 col-lg-9 product-list-box d-flex flex-wrap" id="product-list">              
-        <Link  to="/products/2"  className="container col-12 col-sm-6 col-md-5 col-lg-4 col-xl-3 my-2">
+  return (      
+    
+      <Link  to="/products/2"  className="container col-9 col-sm-6 col-md-5 col-lg-4 col-xl-3 text-center">
             <div className="col-12  p-2 card ">
                 <div className="col-12">
                     <img className="img-fluid" src={productImage} alt="product image"/>
@@ -19,7 +19,7 @@ function ProductBox({productImage, name, price}) {
                 </div>
             </div>
         </Link>
-    </div>
+       
   )
 }
 
