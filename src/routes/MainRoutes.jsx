@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router";
 import Home from "../pages/home/home";
 import Error from "../pages/error/Error";
 import ProductList from "../pages/productList/ProductList";
+import ProductDetails from "../pages/productDetails/ProductDetails";
 
 function MainRoutes() {
 
@@ -11,6 +12,7 @@ function MainRoutes() {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<ProductList />} />
+            <Route path="/products/2" element={<ProductDetails />} />
             <Route path="*" element={<Error />}/>
         </Routes>
     )
