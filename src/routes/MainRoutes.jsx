@@ -6,7 +6,7 @@ import Error from "../pages/error/Error";
 import ProductList from "../pages/productList/ProductList";
 import ProductDetails from "../pages/productDetails/ProductDetails";
 import Login from "../pages/authentication/login";
-import Signup from "../pages/authentication/signup";
+import Signup from "../pages/authentication/signup"
 import Cart from "../pages/cart/Cart";
 
 function MainRoutes() {
