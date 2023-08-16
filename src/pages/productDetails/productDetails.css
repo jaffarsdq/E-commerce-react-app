@@ -6,3 +6,8 @@
    height: fit-content;
    max-height: 60vh;
 }
+
+.btn-warning {
+    text-decoration: none;
+    color: black;
+}

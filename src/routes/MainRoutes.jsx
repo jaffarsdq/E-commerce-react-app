@@ -7,6 +7,7 @@ import ProductList from "../pages/productList/ProductList";
 import ProductDetails from "../pages/productDetails/ProductDetails";
 import Login from "../pages/authentication/login";
 import Signup from "../pages/authentication/signup";
+import Cart from "../pages/cart/Cart";
 
 function MainRoutes() {
 
@@ -16,7 +17,9 @@ function MainRoutes() {
             <Route path="/products" element={<ProductList />} />
             <Route path="/products/2" element={<ProductDetails />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/Signup" element={<Signup />} />
+            <Route path="/Signup" element={<Signup />}/>
+            <Route path="/cart" element={<Cart />}/>
+            <Route path="/products/2/cart" element={<Cart />}/>
             <Route path="*" element={<Error />}/>
         </Routes>
     )

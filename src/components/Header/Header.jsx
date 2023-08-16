@@ -18,17 +18,17 @@ function Header() {
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav ms-auto text-center fw-semibold">
                         <li className="nav-item">
-                            <a className="nav-link cart" aria-current="page" href="#"><i className="bi bi-cart"></i> Cart</a>
+                            <Link to={'./cart'} className="nav-link cart" aria-current="page" href="#"><i className="bi bi-cart"></i> Cart</Link>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Options
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><hr class="dropdown-divider"/></li>
+                            <ul className="dropdown-menu">
+                                <li><a className="dropdown-item" href="#">Settings</a></li>
+                                <li><hr className="dropdown-divider"/></li>
                                 <li>
-                                    <Link to={"/Login"} class="dropdown-item text-danger">
+                                    <Link to={"/Login"} className="dropdown-item text-danger">
                                     Logout
                                     </Link>
                                 </li>
