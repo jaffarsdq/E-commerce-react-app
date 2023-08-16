@@ -1,7 +1,7 @@
 import React from 'react'
 
 //asset import
-import viteSvg from '../../../public/vite.svg'
+import viteSvg from '/vite.svg'
 
 function OrderDetailsProduct() {
   return (
