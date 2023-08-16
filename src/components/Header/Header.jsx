@@ -18,7 +18,7 @@ function Header() {
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav ms-auto text-center fw-semibold">
                         <li className="nav-item">
-                            <Link to={'./cart'} className="nav-link cart" aria-current="page" href="#"><i className="bi bi-cart"></i> Cart</Link>
+                            <Link to={'./cart'} className="nav-link cart" aria-current="page" href="#"><i class="bi bi-cart3"></i> Cart</Link>
                         </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,7 +35,9 @@ function Header() {
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Username</a>
+                            <a className="nav-link" href="#">
+                                Username <i class="bi bi-person-circle"></i>
+                            </a>
                         </li>
                     </ul>
                 </div>

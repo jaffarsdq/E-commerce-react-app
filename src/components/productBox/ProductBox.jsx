@@ -15,7 +15,9 @@ function ProductBox({productImage, name, price}) {
                 <div className="col-12 text-center d-flex flex-column mt-2">
                     <h6>{name}</h6>
                     <p> &#8377; {price}</p>
-                    <button className="btn btn-primary">Product Details</button>
+                    <button className="btn btn-primary">
+                        Product Details
+                    </button>
                 </div>
             </div>
         </Link>

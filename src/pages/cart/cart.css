@@ -7,6 +7,8 @@
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 2rem;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
 .order-details-title {
@@ -49,6 +51,27 @@
     position: sticky;
     top: 10px;
 }
+
+.price-details-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.394);
+    text-transform: uppercase;
+}
+
+.price-details-item {
+    padding: 10px 0px;
+    font-size: 20px;
+}
+
+.price {
+    border-top: 1px solid rgba(128, 128, 128, 0.394);
+    padding-top: 15px;
+    font-size: x-large;
+    font-weight: 500;
+}
+
 
 .price-details-box {
     box-shadow: 0px 1px 5px lightgray;

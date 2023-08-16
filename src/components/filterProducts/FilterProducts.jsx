@@ -8,7 +8,9 @@ function FilterProducts() {
   return (
     <div className="col-10 col-md-10 col-lg-12  mx-auto search-products-wrapper">
         <div className="col">
-            <h6 htmlFor="search-products" className="form-label text-muted">Search products</h6>
+            <h6 htmlFor="search-products" className="form-label text-muted">
+                Search products   
+            </h6>
             <input type="text" className="form-control" placeholder="Search by name" id="search-products" aria-describedby="search-bar"/>
         </div>
         <div className="col mt-2">
@@ -58,8 +60,12 @@ function FilterProducts() {
         </div>
         <div className="col mb-2">
             <div className="d-grid col-12 mb-3">
-                <button className="btn btn-warning" id="search-btn">Search</button>
-                <button className="btn btn-danger mt-1" id="clear-btn">Clear Filters</button>
+                <button className="btn btn-warning" id="search-btn">
+                    <i class="bi bi-search"></i> Search
+                </button>
+                <button className="btn btn-danger mt-1" id="clear-btn">
+                    <i class="bi bi-stars"></i> Clear Filters
+                </button>
             </div>
         </div>
     </div>
