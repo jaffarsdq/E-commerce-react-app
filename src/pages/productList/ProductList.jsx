@@ -32,14 +32,13 @@ function ProductList() {
     
     useEffect(() => {
         response(query.get('category'));
-        console.log(query.get('category'))
-    },[])
+    },[query.get('category')])
   
 
 
     return (
         <>
-           <ProductTile word={'All products'}/>
+           <ProductTile word={query.get('category') || "All Products"}/>
             <div className="main container">
                 <div className="row  col-12  col-md-12 col-lg-3 search-products-wrapper mx-auto">
                         <FilterProducts/>    
@@ -53,6 +52,7 @@ function ProductList() {
                             productImage={product.image} 
                             name={shrink(product.title)}
                             price={product.price}
+                            id={product.id}
                         />
                     )}
                 </div>

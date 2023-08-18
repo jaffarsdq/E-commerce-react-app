@@ -1,9 +1,19 @@
 import React from 'react'
+import useCategory from '../../hooks/useCategory';
+import { useNavigate } from 'react-router-dom';
 
 function FilterProducts() {
 
     const minPriceOptions = [0, 10, 20, 50, 100, 200];
     const maxPriceOptions = [10, 20, 50, 100, 200, 1000];
+
+    const [categories] = useCategory();
+
+    const navigate = useNavigate();
+
+    function handleCategoryClick(category) {
+        navigate(`/products?category=${category}`)
+    }
 
   return (
     <div className="col-10 col-md-10 col-lg-12  mx-auto search-products-wrapper">
@@ -17,21 +27,11 @@ function FilterProducts() {
             <h6 className="fs-6 text-muted">Categories</h6>
         </div>
         <div className="col categories text-center" id="categoryList">
-            <a href="#" className="col-md-12 ">
-                Electronics
-            </a>
-            <a href="#" className="col-md-12 ">
-                Kitchen ware
-            </a>
-            <a href="#" className="col-md-12 ">
-                Woman outfit
-            </a>
-            <a href="#" className="col-md-12 ">
-                Sports
-            </a>
-            <a href="#" className="col-md-12">
-                Gaming
-            </a>
+            {categories && categories.map((category) => 
+                <a onClick={() => handleCategoryClick(category)} key={category} className="col-md-12 text-capitalize">
+                    {category}
+                </a>
+            )}
         </div>
         <div className="col mt-2">
             <h6 className="col fs-6 text-muted">Filter by price</h6>   

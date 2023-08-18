@@ -1,23 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './home.css'
 
 import CategoryItem from '../../components/categoryItem/CategoryItem'
-import axios from 'axios';
-import { getAllCategories } from '../../apis/fakeStoreApi';
+import useCategory from '../../hooks/useCategory';
 
 
 function Home() {
 
-    const [categories, setCategories] = useState();
-
-    const response = async function fetchCategories () {
-        const response = await axios.get(getAllCategories());
-        const data = response.data
-        setCategories(data);
-    }
-    useEffect(() => {
-        response();
-    },[])
+    const [categories] = useCategory();
 
 
   return (
