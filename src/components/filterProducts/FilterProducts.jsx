@@ -2,6 +2,8 @@ import React from 'react'
 import useCategory from '../../hooks/useCategory';
 import { useNavigate } from 'react-router-dom';
 
+import './FilterProducts.css'
+
 function FilterProducts() {
 
     const minPriceOptions = [0, 10, 20, 50, 100, 200];
@@ -28,7 +30,7 @@ function FilterProducts() {
         </div>
         <div className="col categories text-center" id="categoryList">
             {categories && categories.map((category) => 
-                <a onClick={() => handleCategoryClick(category)} key={category} className="col-md-12 text-capitalize">
+                <a onClick={() => handleCategoryClick(category)} key={category} className="category col-md-12 text-capitalize">
                     {category}
                 </a>
             )}
