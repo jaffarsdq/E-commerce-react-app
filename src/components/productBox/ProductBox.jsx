@@ -9,7 +9,7 @@ function ProductBox({productImage, name, price}) {
     
       <Link  to={`/products/${name}`}  className="container col-9 col-sm-6 col-md-5 col-lg-4 col-xl-3 text-center">
             <div className="col-12  p-2 card ">
-                <div className="col-12">
+                <div className="col-12 d-flex justify-content-center">
                     <img className="img-fluid" src={productImage} alt="product image"/>
                 </div>
                 <div className="col-12 text-center d-flex flex-column mt-2">
