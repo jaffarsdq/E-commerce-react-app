@@ -5,14 +5,17 @@ import './productList.css'
 import ProductTile from "../../components/pageTitle/PageTitle";
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { getAllProducts } from "../../apis/fakeStoreApi";
+import { getAllProducts, getAllProductsByCategory } from "../../apis/fakeStoreApi";
+import { useSearchParams } from "react-router-dom";
 
 function ProductList() {
     
     const [products, setProducts] = useState();
+    const [query] = useSearchParams();
     
-    const response = async function fetchproducts () {
-        const response = await axios.get(getAllProducts());
+    const response = async function fetchproducts (category) {
+        const downloadCategory = category ? getAllProductsByCategory(category) : getAllProducts(); 
+        const response = await axios.get(downloadCategory);
         setProducts(response.data);
     }
 
@@ -28,7 +31,8 @@ function ProductList() {
     }
     
     useEffect(() => {
-        response();
+        response(query.get('category'));
+        console.log(query.get('category'))
     },[])
   
 

@@ -3,10 +3,6 @@ import React, { useEffect } from 'react'
 
 function ProductTile({word}) {
 
-  useEffect(() => {
-    console.log(word);
-  },[])
-
   return (
     <div className="container my-4">
         <div className="main row">
