@@ -61,10 +61,10 @@ function FilterProducts() {
         <div className="col mb-2">
             <div className="d-grid col-12 mb-3">
                 <button className="btn btn-warning" id="search-btn">
-                    <i class="bi bi-search"></i> Search
+                    <i className="bi bi-search"></i> Search
                 </button>
                 <button className="btn btn-danger mt-1" id="clear-btn">
-                    <i class="bi bi-stars"></i> Clear Filters
+                    <i className="bi bi-stars"></i> Clear Filters
                 </button>
             </div>
         </div>

@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 //css import
 import './productBox.css'
 
-function ProductBox({productImage, name, price}) {
+function ProductBox({productImage, name, price, key}) {
   return (      
     
-      <Link  to="/products/2"  className="container col-9 col-sm-6 col-md-5 col-lg-4 col-xl-3 text-center">
+      <Link  to={`/products/${key}`}  className="container col-9 col-sm-6 col-md-5 col-lg-4 col-xl-3 text-center">
             <div className="col-12  p-2 card ">
                 <div className="col-12">
                     <img className="img-fluid" src={productImage} alt="product image"/>

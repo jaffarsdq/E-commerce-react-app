@@ -53,10 +53,10 @@ function Cart() {
                                 </div>
                             <div className="price-details-btn-group">
                                 <a className="btn continue-shopping-btn text-decoration-none">
-                                <i class="bi bi-chevron-right"></i> Continue Shopping
+                                <i className="bi bi-chevron-right"></i> Continue Shopping
                                 </a>
                                 <a className="btn btn-primary checkout-btn text-decoration-none">
-                                <i class="bi bi-cart-check"></i> Checkout
+                                <i className="bi bi-cart-check"></i> Checkout
                                 </a>
                             </div>
                             

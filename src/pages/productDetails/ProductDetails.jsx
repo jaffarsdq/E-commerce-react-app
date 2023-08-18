@@ -29,10 +29,10 @@ function ProductDetails() {
                     </p>
                     <div className="row d-flex justify-content-around g-0">
                         <button className="col-md-6 p-2 m-1 btn btn-primary">
-                            <i class="bi bi-plus"></i> Add to cart
+                            <i className="bi bi-plus"></i> Add to cart
                         </button>
                         <Link to={'/cart'} className="col-md-5 p-2 m-1 btn btn-warning">
-                            <i class="bi bi-cart3"></i> Go to cart
+                            <i className="bi bi-cart3"></i> Go to cart
                         </Link>
                     </div>
 
