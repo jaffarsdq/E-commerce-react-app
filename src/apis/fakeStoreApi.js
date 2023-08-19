@@ -1,15 +1,17 @@
+const apiUrl = import.meta.env.VITE_BASE_URL
+
 export function getAllCategories() {
-    return 'https://fakestoreapi.com/products/categories';
+    return `${apiUrl}/products/categories`;
 }
 
 export function getAllProducts() {
-    return 'https://fakestoreapi.com/products';
+    return `${apiUrl}/products`;
 }
 
 export function getAllProductsByCategory(category) {
-    return `https://fakestoreapi.com/products/category/${category}`;
+    return `${apiUrl}/products/category/${category}`;
 }
 
 export function getProduct(id) {
-    return `https://fakestoreapi.com/products/${id}`;
+    return `${apiUrl}/products/${id}`;
 }
