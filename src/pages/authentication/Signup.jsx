@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './auth.css'
-import Auth from '../../components/auth/auth'
+import Auth from '../../components/auth/Auth'
 import { Link } from 'react-router-dom'
+import { signup } from '../../apis/fakeStoreApi'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 function Signup() {
+
+    const navigate = useNavigate();
+
+    const [resetForm, setResetForm] = useState(false);
+
   return (
     <>
         {/* <!-- welcome --> */}
@@ -24,7 +32,22 @@ function Signup() {
                 <div className="sign-up text-center">
                     <h4>Signup</h4>
                 </div>
-                <Auth/>
+                <Auth 
+                    onSubmit={ async (authAgrs) => {
+                        try {
+                            await axios.post(signup(),{
+                                username: authAgrs.username,
+                                email: authAgrs.email,
+                                password: authAgrs.password
+                            })
+                            navigate('/login')           
+                        } catch (error) {
+                            console.log(error)
+                            setResetForm(!resetForm)
+                        }
+                    }}
+                    resetForm={resetForm}
+                />
                 <div className="signup-btn text-center" id="showSignupBtn">
                     <Link to="/Login">
                        Already have an Account? Login Here

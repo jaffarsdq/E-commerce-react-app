@@ -15,3 +15,6 @@ export function getAllProductsByCategory(category) {
 export function getProduct(id) {
     return `${apiUrl}/products/${id}`;
 }
+export function signup() {
+    return `${apiUrl}/users`;
+}
