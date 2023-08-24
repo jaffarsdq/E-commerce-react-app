@@ -2,12 +2,16 @@ import React, {useRef} from 'react'
 
 import './auth.css'
 import Auth from '../../components/auth/Auth'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import axios from 'axios';
 import { signIn } from '../../apis/fakeStoreApi';
+import { useCookies } from 'react-cookie';
 
 function Login() {
+
+    const [token, setToken] = useCookies(['jwt-token'])
+    const navigate = useNavigate();
 
     const authRef = useRef(null);
     async function onAuthFormSubmit(formDetails) {
@@ -18,6 +22,8 @@ function Login() {
                 password: formDetails.password
             }); 
             console.log(response);
+            setToken('jwt-token', response.data.token);
+            navigate('/');
         } catch (error) {
             authRef.current.resetFormData();
             console.log(error);
@@ -45,7 +51,7 @@ function Login() {
                 </div>
                 <Auth onSubmit={onAuthFormSubmit} ref={authRef} />
                 <div className="signup-btn text-center" id="showSignupBtn">
-                    <Link to="/Signup">
+                    <Link to="/signup">
                         Don't have an Account? Signup Here
                     </Link>
                 </div>

@@ -5,12 +5,13 @@ import './index.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
 import { BrowserRouter } from 'react-router-dom'
+import { CookiesProvider } from 'react-cookie'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-
+  <CookiesProvider defaultSetCookies={{ path: '/' }} />
   <App />
-
+  <CookiesProvider/>
   </BrowserRouter>
 )

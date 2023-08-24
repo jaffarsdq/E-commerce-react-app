@@ -1,10 +1,18 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 //css imports
 import './Header.css'
 import { Link } from 'react-router-dom'
+import { useCookies } from 'react-cookie';
 
 function Header() {
+
+    const [token, setToken, removeToken] = useCookies(['jwt-token']);
+
+    useEffect(() => {
+        console.log(token, setToken, removeToken);
+      }, [token]);
+
   return (
     <div className="header">
         <nav className="navbar navbar-expand-lg">
@@ -27,10 +35,11 @@ function Header() {
                             <ul className="dropdown-menu">
                                 <li><a className="dropdown-item" href="#">Settings</a></li>
                                 <li><hr className="dropdown-divider"/></li>
-                                <li>
-                                    <Link to={"/Login"} className="dropdown-item text-danger">
-                                    Logout
-                                    </Link>
+                                <li className="dropdown-item text-danger">
+                                    {token['jwt-token'] ? <Link onClick={() => {
+                                        console.log(token);
+                                        removeToken('jwt-token');
+                                    }} to="/Login" className='text-danger text-decoration-none'>Logout</Link> : <Link className='text-success text-decoration-none' to="/signup">Signup</Link>}
                                 </li>
                             </ul>
                         </li>
