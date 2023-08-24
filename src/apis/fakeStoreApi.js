@@ -18,3 +18,7 @@ export function getProduct(id) {
 export function signup() {
     return `${apiUrl}/users`;
 }
+
+export function signIn() {
+    return `${apiUrl}/auth/login`;
+}

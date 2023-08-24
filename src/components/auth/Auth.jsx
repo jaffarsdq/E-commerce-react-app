@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useImperativeHandle} from 'react'
 
-function Auth({onSubmit, resetForm}) {
+function Auth({onSubmit}, ref) {
 
     const [formDetails, setFormDetails] = useState({
         username: '',
@@ -22,24 +22,27 @@ function Auth({onSubmit, resetForm}) {
   }
 
   function onFormSubmit() {
-    onSubmit(formDetails)
-    setFormDetails({...formDetails, isLoading: true})
+      setFormDetails({...formDetails, isLoading: true})
+      onSubmit(formDetails, resetForm);
   }
 
-  function reset() {
-      setFormDetails(
-          {
-              username: '',
-              email: '', 
-              password: '',
-              isLoading: false,
-          }
-      )
+  function resetForm() {
+    setFormDetails({ username: '',
+    email: '', 
+    password: '',
+    isLoading: false,});
   }
 
-  useEffect(() => {
-    reset()
-  },[resetForm])
+
+  useImperativeHandle(ref, () => {
+    return {
+        resetFormData: resetForm
+    }
+    }, []);
+
+    useEffect(() => {
+        setFormDetails({email: '', password: '', username: '', isLoading: false});
+    }, [])
 
   return (
     <>
@@ -75,7 +78,7 @@ function Auth({onSubmit, resetForm}) {
         </div>
         <div className="input-group">
             <button className="form-control btn btn-primary" 
-                    onClick={() => onFormSubmit(formDetails)} 
+                    onClick={onFormSubmit} 
                     type="button"
                     disabled={formDetails.isLoading}>
                 <span className={
@@ -94,4 +97,4 @@ function Auth({onSubmit, resetForm}) {
   )
 }
 
-export default Auth
+export default React.forwardRef(Auth);

@@ -19,7 +19,6 @@ function ProductDetails() {
             const response = await axios.get(getProduct(id));
             const responseObject = response.data;
             setProduct(responseObject);
-            console.log(product)
           } catch (error) {
             console.error('Error fetching product data:', error);
           }
