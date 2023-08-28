@@ -5,7 +5,7 @@ import Home from "../pages/Home/Home"
 import Error from "../pages/error/Error";
 import ProductList from "../pages/productList/ProductList";
 import ProductDetails from "../pages/productDetails/ProductDetails";
-import Login from "../pages/authentication/login";
+import Login from "../pages/authentication/Login";
 import Signup from "../pages/authentication/Signup";
 import Cart from "../pages/cart/Cart";
 

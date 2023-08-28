@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {useContext, useRef} from 'react'
 
 import './auth.css'
 import Auth from '../../components/auth/Auth'
@@ -7,28 +7,38 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { signIn } from '../../apis/fakeStoreApi';
 import { useCookies } from 'react-cookie';
+import jwt_decode from "jwt-decode";
+import UserContext from '../../context/UserContext';
+
+
 
 function Login() {
 
-    const [token, setToken] = useCookies(['jwt-token'])
+    const [token, setToken] = useCookies(['jwt-token']);
+    const {setUser} = useContext(UserContext);
     const navigate = useNavigate();
-
     const authRef = useRef(null);
+
     async function onAuthFormSubmit(formDetails) {
         try {
             const response = await axios.post(signIn(), {
                 username: formDetails.username,
                 email: formDetails.email,
                 password: formDetails.password
-            }); 
-            console.log(response);
-            setToken('jwt-token', response.data.token);
+            }, {withCredentials: true}); 
+            const tokenDetails = jwt_decode(response.data.token);
+            setUser({username: tokenDetails.user, id: tokenDetails.id});
+            setToken('jwt-token', response.data.token, {httpOnly:true});
             navigate('/');
         } catch (error) {
             authRef.current.resetFormData();
             console.log(error);
         }
     }
+
+    // useEffect(() => {
+    //     console.log(user);
+    // })
 
   return (
     <>
