@@ -1,6 +1,8 @@
 import React from 'react'
 import './home.css'
 
+//components import
+import Footer from '../../components/Footer/Footer';
 import CategoryItem from '../../components/categoryItem/CategoryItem'
 import useCategory from '../../hooks/useCategory';
 
@@ -32,6 +34,7 @@ function Home() {
         <div className="display-6 col text-center">
             <strong>S</strong>elect a category to start shopping
         </div>
+        <Footer/>
     </>
   )
 }

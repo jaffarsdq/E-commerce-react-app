@@ -52,7 +52,7 @@ function Header() {
                             </ul>
                         </li>
                         <li className="nav-item">
-                            {user && <a className="nav-link" href="#">{user.username}</a>}
+                            {user && <a className="nav-link text-capitalize active" href="#">{user.username}</a>}
                         </li>
                     </ul>
                 </div>

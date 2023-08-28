@@ -43,13 +43,13 @@ function ProductDetails() {
                 <h3 className="display-5 fw-normal fs-1" id="productTitle">
                     {product.title}
                 </h3>
-                <h3 className="fw-normal" id="productPrice">
+                <h3 className="fw-normal text-success py-2" id="productPrice">
                     &#8377;{product.price}
                 </h3>
                 <h4 className="text-muted fw-light fs-5">
                     Description
                 </h4>
-                <p className="lead" id="productDescription">
+                <p className="lead text-break" id="productDescription">
                     {product.description}
                 </p>
                 <h3 className="lead">

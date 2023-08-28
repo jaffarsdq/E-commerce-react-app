@@ -2,7 +2,7 @@ import FilterProducts from "../../components/filterProducts/FilterProducts";
 import ProductBox from "../../components/productBox/ProductBox";
 //css import
 import './productList.css'
-import ProductTile from "../../components/pageTitle/PageTitle";
+import ProductTitle from "../../components/pageTitle/PageTitle";
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { getAllProducts, getAllProductsByCategory } from "../../apis/fakeStoreApi";
@@ -38,7 +38,7 @@ function ProductList() {
 
     return (
         <>
-           <ProductTile word={query.get('category') || "All Products"}/>
+           <ProductTitle word={query.get('category') || "All Products"}/>
             <div className="main container">
                 <div className="row  col-12  col-md-12 col-lg-3 search-products-wrapper mx-auto">
                         <FilterProducts/>    

@@ -1,33 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import { useLocation } from 'react-router-dom';
-
 //css imports
 import './Footer.css'
 function Footer() {
 
-  const [isScrollbarVisible, setIsScrollbarVisible] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    const handleResize = () => {
-      // Check if the document's height is greater than the viewport's height
-      setIsScrollbarVisible(document.body.scrollHeight > window.innerHeight);
-    };
-
-    // Add an event listener for window resize
-    window.addEventListener('resize', handleResize);
-
-    // Initial check
-    handleResize();
-
-    // Clean up event listener on unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [location]);
-
   return (
-    <footer className={`footer-section mt-2 ${isScrollbarVisible ? '' : 'fixed-bottom'}`}>
+    <footer className={'footer-section mt-2 fixed-bottom'}>
         <div className='copyrights'>
           &#169; Jaffar Sadhiq
         </div>
