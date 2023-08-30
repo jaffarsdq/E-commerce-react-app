@@ -1,28 +1,24 @@
 import React from 'react'
 
-//asset import
-import viteSvg from '/vite.svg'
+function OrderDetailsProduct({ image, title, price, quantity}) {
 
-function OrderDetailsProduct() {
+    const quantityAvailable = [1,2,3,4,5,6,7,8,9,10];
+
   return (
     <div className="d-md-flex order-details-product text-center  text-md-start">
         <div className="order-details-product-img my-1 col-12 col-md-3">
-            <img className='img-fluid' src={viteSvg} alt=""/>
+            <img className='img-fluid' src={image} alt=""/>
         </div>
         <div className="order-details-product-data my-1 col-12 col-md-6">
-            <div>Some product</div>
-            <div>&#8377; 10000</div>
+            <div>{title}</div>
+            <div>&#8377; {price}</div>
         </div>
         <div className="order-details-product-actions my-1 col-12 col-md-3">
             <div className="order-details-product-quantity">
                 <div className="fw-bold my-2">Quantity</div>
                 <div className="form-group">
                     <select name="" id="" className="form-select">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                    {quantityAvailable.map((id) => <option selected={quantity == id} value={id} key={id}>{id}</option>)}
                     </select>
                 </div>
             </div>
