@@ -1,4 +1,7 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
+import CartContext from '../../context/CartContext';
+import axios from 'axios';
+import { getProduct } from '../../apis/fakeStoreApi';
 
 //css import
 import './cart.css'
@@ -6,13 +9,24 @@ import './cart.css'
 //component import
 import OrderDetailsProduct from '../../components/orderDetailProduct/OrderDetailsProduct'
 import ProductTile from '../../components/pageTitle/PageTitle'
-import { useParams } from 'react-router-dom'
-import useCart from '../../hooks/useCart'
+
 
 function Cart() {
 
-    const {userId} = useParams();
-    const [cart, setCart] = useCart(userId);
+    const {cart} = useContext(CartContext);
+
+    
+    async function downloadCartProducts(cart) {
+        if(!cart || !cart.products) return;
+        const productsPromise = cart.products.map(product => axios.get(getProduct(product.productId)));
+        const productPromiseResponse = await axios.all(productsPromise);   
+
+    }
+
+    useEffect(() => {
+        console.log(cart);
+        downloadCartProducts(cart);
+    }, [cart])
 
   return (
     <>
