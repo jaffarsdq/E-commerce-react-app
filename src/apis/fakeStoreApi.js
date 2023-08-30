@@ -22,3 +22,15 @@ export function signup() {
 export function signIn() {
     return `${apiUrl}/auth/login`;
 }
+
+export function getCartByUser(userId) {
+    return `${apiUrl}/carts/user/${userId}`;
+}
+
+export function addProductToUserCart() {
+    return `${apiUrl}/carts`;
+} 
+
+export function updateProductInCart() {
+    return `${apiUrl}/carts/updateProduct`;
+} 

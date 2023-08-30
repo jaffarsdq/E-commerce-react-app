@@ -6,6 +6,7 @@ import Header from './components/Header/Header'
 import MainRoutes from './routes/MainRoutes'
 //contextImport
 import userContext from './context/UserContext.js'
+import CartContext from './context/CartContext'
 //library imports
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -15,6 +16,7 @@ import jwt_decode from "jwt-decode";
 function App() {
 
   const [user, setUser] = useState(null);
+  const [cart, setCart] = useState(null);
   const [token, setToken] = useCookies(['jwt-token']);
 
   function accessToken() {
@@ -33,8 +35,10 @@ function App() {
   return (
     <>
       <userContext.Provider value={{user, setUser}}>
+      <CartContext.Provider value={{cart, setCart}}>
       <Header/>
       <MainRoutes />
+      </CartContext.Provider>
       </userContext.Provider>
     </>
   )

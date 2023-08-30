@@ -1,4 +1,4 @@
-import React, {useContext, useRef} from 'react'
+import React, {useContext, useRef, useEffect} from 'react'
 
 import './auth.css'
 import Auth from '../../components/auth/Auth'
@@ -9,7 +9,6 @@ import { signIn } from '../../apis/fakeStoreApi';
 import { useCookies } from 'react-cookie';
 import jwt_decode from "jwt-decode";
 import UserContext from '../../context/UserContext';
-
 
 
 function Login() {
@@ -36,9 +35,9 @@ function Login() {
         }
     }
 
-    // useEffect(() => {
-    //     console.log(user);
-    // })
+    useEffect(() => {
+        
+    },[authRef])
 
   return (
     <>

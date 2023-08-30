@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 
 //css import
 import './cart.css'
@@ -6,8 +6,14 @@ import './cart.css'
 //component import
 import OrderDetailsProduct from '../../components/orderDetailProduct/OrderDetailsProduct'
 import ProductTile from '../../components/pageTitle/PageTitle'
+import { useParams } from 'react-router-dom'
+import useCart from '../../hooks/useCart'
 
 function Cart() {
+
+    const {userId} = useParams();
+    const [cart, setCart] = useCart(userId);
+
   return (
     <>
         <ProductTile word={'Your cart'}/>

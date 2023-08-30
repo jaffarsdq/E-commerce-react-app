@@ -62,7 +62,7 @@ function ProductDetails() {
                     <button className="col-md-6 p-2 m-1 btn btn-primary">
                         <i className="bi bi-plus"></i> Add to cart
                     </button>
-                    <Link to={'/cart'} className="col-md-5 p-2 m-1 btn btn-warning">
+                    <Link to={`/cart/${id}`} className="col-md-5 p-2 m-1 btn btn-warning">
                         <i className="bi bi-cart3"></i> Go to cart
                     </Link>
                 </div>

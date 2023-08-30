@@ -1,21 +1,27 @@
 //library import
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect} from 'react'
 
 //css import
 import './Header.css'
 //library imports
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie';
+import axios from 'axios';
+//context import
 import UserContext from '../../context/UserContext';
+import CartContext from '../../context/CartContext';
+
 function Header() {
 
     const [token, setToken, removeToken] = useCookies(['jwt-token']);
     const {user, setUser} = useContext(UserContext);
+    const {cart, setCart} = useContext(CartContext);
 
     function logout() {
         removeToken('jwt-token', {httpOnly: true});
         axios.get(`${import.meta.env.VITE_BASE_URL}/logout`, {withCredentials: true});
         setUser(null);
+        setCart(null);
       }
     
       useEffect(() => {
@@ -39,8 +45,12 @@ function Header() {
                                 Options
                             </a>
                             <ul className="dropdown-menu">
-                                <li className="drppdown-item">
-                                    <Link to={'./cart'} className="nav-link cart" aria-current="page" href="#"><i className="bi bi-cart3"></i> Cart</Link>
+                                <li className="dropdown-item">
+                                    <Link to={`./cart/${user && user.id}`} className="nav-link cart position-relative" aria-current="page" href="#"><i className="bi bi-cart3"></i> Cart
+                                        <span className="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {cart && cart.products && `(${cart.products.length})`}
+                                        </span>
+                                    </Link>
                                 </li>
                                 <li><a className="dropdown-item" href="#">Settings</a></li>
                                 <li><hr className="dropdown-divider"/></li>
