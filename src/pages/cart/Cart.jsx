@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import CartContext from '../../context/CartContext';
 import axios from 'axios';
 import { getProduct } from '../../apis/fakeStoreApi';
