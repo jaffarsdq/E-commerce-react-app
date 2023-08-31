@@ -19,13 +19,21 @@ function App() {
   const [token, setToken] = useCookies(['jwt-token']);
 
    async function accessToken() {
-    const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/accesstoken`, {withCredentials: true})
-    setToken('jwt-token', res.data.token, {httpOnly: true});
-    const tokenDetails = jwt_decode(res.data.token);
-    setUser({username: tokenDetails.user, id: tokenDetails.id});
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/accesstoken`, {withCredentials: true})
+        setToken('jwt-token', res.data.token, {httpOnly: true});
+        const tokenDetails = jwt_decode(res.data.token);
+        setUser({username: tokenDetails.user, id: tokenDetails.id});
+      } catch (error) {
+        console.log('error')
+      }
   }
 
   async function load() {
+    if(!user) {
+      await accessToken();
+    }
+
     if(user) {
       await fetchUserCart(user.id, setCart);
     }
