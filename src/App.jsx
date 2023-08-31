@@ -26,10 +26,6 @@ function App() {
   }
 
   async function load() {
-    if(!user) {
-      await accessToken();
-    }
-
     if(user) {
       await fetchUserCart(user.id, setCart);
     }

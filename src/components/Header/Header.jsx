@@ -25,7 +25,6 @@ function Header() {
       }
     
       useEffect(() => {
-        console.log("user", user)
       }, [token]);
 
   return (
