@@ -1,5 +1,3 @@
-//css import
-import './App.css'
 //components import
 import Header from './components/Header/Header'
 //pages import
