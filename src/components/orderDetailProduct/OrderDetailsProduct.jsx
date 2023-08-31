@@ -1,6 +1,6 @@
 import React from 'react'
 
-function OrderDetailsProduct({ image, title, price, quantity}) {
+function OrderDetailsProduct({ image, title, price, quantity,  onRemove}) {
 
     const quantityAvailable = [1,2,3,4,5,6,7,8,9,10];
 
@@ -22,7 +22,7 @@ function OrderDetailsProduct({ image, title, price, quantity}) {
                     </select>
                 </div>
             </div>
-            <div className="order-details-product-remove btn btn-danger">Remove</div>
+            <div className="order-details-product-remove btn btn-danger" onClick={onRemove}>Remove</div>
         </div>
     </div>
   )

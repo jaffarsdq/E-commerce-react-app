@@ -1,19 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react'
-import CartContext from '../../context/CartContext';
 import axios from 'axios';
-import { getProduct } from '../../apis/fakeStoreApi';
+//context import
+import CartContext from '../../context/CartContext';
+import UserContext from '../../context/UserContext';
+//api import
+import { getProduct, updateProductInCart } from '../../apis/fakeStoreApi';
 
 //css import
 import './cart.css'
 
 //component import
 import OrderDetailsProduct from '../../components/orderDetailProduct/OrderDetailsProduct'
-import ProductTile from '../../components/pageTitle/PageTitle'
+import ProductTitle from '../../components/pageTitle/PageTitle'
 
 
 function Cart() {
 
-    const {cart} = useContext(CartContext);
+    const {cart, setCart} = useContext(CartContext);
+    const {user} = useContext(UserContext);
     const [products, setProducts] = useState([]);
     
     async function downloadCartProducts(cart) {
@@ -33,14 +37,19 @@ function Cart() {
 
     }
 
+    async function onProductUpdate(productId, quantity) {
+        if(!user) return;
+        const response = await axios.put(updateProductInCart(), {userId: user.id, productId, quantity});
+        setCart({...response.data});
+    }
+
     useEffect(() => {
-        console.log(cart);
         downloadCartProducts(cart);
     }, [cart])
 
   return (
     <>
-        <ProductTile word={'Your cart'}/>
+        <ProductTitle word={'Your cart'}/>
         <div className="container">
             <div className="row">
                 <div className="col-11  col-lg-8 order-2 order-lg-1 mx-auto">
@@ -54,6 +63,7 @@ function Cart() {
                                     image={product.image}
                                     price={product.price}
                                     quantity={product.quantity}
+                                    onRemove={() => onProductUpdate(product.id, 0)}
                                 />)}
                         </div>    
                 </div>
