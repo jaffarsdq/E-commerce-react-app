@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 //context import
 import CartContext from '../../context/CartContext';
 import UserContext from '../../context/UserContext';
@@ -16,9 +17,14 @@ import ProductTitle from '../../components/pageTitle/PageTitle'
 
 function Cart() {
 
+    const navigator = useNavigate();
     const {cart, setCart} = useContext(CartContext);
     const {user} = useContext(UserContext);
     const [products, setProducts] = useState([]);
+
+    function navigate() {
+        return  navigator('/products');
+    }
     
     async function downloadCartProducts(cart) {
         if(!cart || !cart.products) return;
@@ -92,7 +98,9 @@ function Cart() {
                                     </div>
                                 </div>
                             <div className="price-details-btn-group">
-                                <a className="btn continue-shopping-btn text-decoration-none">
+                                <a className="btn continue-shopping-btn text-decoration-none"
+                                    onClick={navigate}    
+                                >
                                 <i className="bi bi-chevron-right"></i> Continue Shopping
                                 </a>
                                 <a className="btn btn-primary checkout-btn text-decoration-none">
