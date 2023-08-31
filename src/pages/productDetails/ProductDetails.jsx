@@ -1,29 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 //react router imports
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 //css import
 import './productDetails.css'
 import axios from 'axios';
-import { getProduct } from '../../apis/fakeStoreApi';
+import { addProductToUserCart, getProduct } from '../../apis/fakeStoreApi';
+import UserContext from '../../context/UserContext';
+import CartContext from '../../context/CartContext';
 
 function ProductDetails() {
 
+    const navigate = useNavigate();
     const {id} = useParams();
     const [product, setProduct] = useState(null);
 
+    const {user} = useContext(UserContext);
+    const {setCart} = useContext(CartContext);
+
+    async function downloadProduct(id) {
+      try {
+        const response = await axios.get(getProduct(id));
+        const responseObject = response.data;
+        setProduct(responseObject);
+      } catch (error) {
+        console.error('Error fetching product data:', error);
+      }
+    }
+
+    async function addProductToCart() {
+        if(!user) return;
+        const response = await axios.put(addProductToUserCart(), {userId: user.id, productId: id});
+        setCart({...response.data});
+        navigate(`/cart/${user.id}`);
+    }
+
     useEffect(() => {
-        async function fetchData() {
-          try {
-            const response = await axios.get(getProduct(id));
-            const responseObject = response.data;
-            setProduct(responseObject);
-          } catch (error) {
-            console.error('Error fetching product data:', error);
-          }
-        }
-        fetchData();
+        downloadProduct(id);
     }, [id]);
 
     if (!product) {
@@ -59,10 +73,10 @@ function ProductDetails() {
                     rated by <strong>{product.rating.count}</strong> people
                 </h3>
                 <div className="row d-flex justify-content-around g-0">
-                    <button className="col-md-6 p-2 m-1 btn btn-primary">
+                    <button className="col-md-6 p-2 m-1 btn btn-primary" onClick={addProductToCart}>
                         <i className="bi bi-plus"></i> Add to cart
                     </button>
-                    <Link to={`/cart/${id}`} className="col-md-5 p-2 m-1 btn btn-warning">
+                    <Link to={`/cart/${user && user.id}`} className="col-md-5 p-2 m-1 btn btn-warning">
                         <i className="bi bi-cart3"></i> Go to cart
                     </Link>
                 </div>
