@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom'
 //css import
 import './productDetails.css'
 import axios from 'axios';
+//api import
 import { addProductToUserCart, getProduct } from '../../apis/fakeStoreApi';
+//context import
 import UserContext from '../../context/UserContext';
 import CartContext from '../../context/CartContext';
 
