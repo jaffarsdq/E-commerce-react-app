@@ -53,6 +53,7 @@ function Cart() {
 
     useEffect(() => {
         downloadCartProducts(cart);
+        console.log(products.price)
     }, [cart])
     
     if(!cart) {
@@ -88,6 +89,7 @@ function Cart() {
                                     <div className="price-details-data">
                                         <div className="price-details-item d-flex flex-row justify-content-between">
                                             <div>Price</div>
+                                            {/* Price */}
                                             <div id="total-price">&#8377;1000</div>
                                         </div>
                                         <div className="price-details-item d-flex flex-row justify-content-between">
@@ -100,6 +102,7 @@ function Cart() {
                                         </div>
                                         <div className="price d-flex flex-row justify-content-between">
                                             <div>Total Amount</div>
+                                            {/* total price */}
                                             <div id="net-price">&#8377;990</div>
                                         </div>
                                     </div>

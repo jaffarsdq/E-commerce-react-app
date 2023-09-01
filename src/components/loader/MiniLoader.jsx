@@ -2,7 +2,7 @@ import './loader.css'
 
 function MiniLoader() {
   return (
-    <div class="mini-loader">
+    <div className="mini-loader">
         <div>
 
         </div>
