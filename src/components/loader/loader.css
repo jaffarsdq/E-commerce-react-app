@@ -1,0 +1,53 @@
+.loader-backdrop {
+    position: absolute;
+    background-color: rgba(0,0,0,0.5);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+}
+
+.loader > div {
+    border: 5px solid var(--jean-blue); 
+    width: 5rem;
+    height: 5rem;
+    border-top: 5px solid var(--cloudy);
+    border-bottom: 5px solid var(--cloudy);
+    border-radius: 50%;
+    animation: spinner2 2s linear infinite;
+}
+
+.mini-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+}
+
+.mini-loader > div {
+    border: 5px solid black; 
+    width: 2rem;
+    height: 2rem;
+    border-top: 5px solid var(--jean-blue);
+    border-bottom: 5px solid var(--jean-blue);
+    border-radius: 50%;
+    animation: spinner2 2s linear infinite;
+}
+
+@keyframes spinner2 {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

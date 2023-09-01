@@ -11,6 +11,7 @@ import { addProductToUserCart, getProduct } from '../../apis/fakeStoreApi';
 //context import
 import UserContext from '../../context/UserContext';
 import CartContext from '../../context/CartContext';
+import Loader from '../../components/loader/loader';
 
 function ProductDetails() {
 
@@ -43,7 +44,7 @@ function ProductDetails() {
     }, [id]);
 
     if (!product) {
-    return <p>Loading...</p>;
+    return  <Loader/>;
     }
 
   return (

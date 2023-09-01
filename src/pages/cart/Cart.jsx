@@ -13,6 +13,8 @@ import './cart.css'
 //component import
 import OrderDetailsProduct from '../../components/orderDetailProduct/OrderDetailsProduct'
 import ProductTitle from '../../components/pageTitle/PageTitle'
+import Loader from '../../components/loader/loader';
+import MiniLoader from '../../components/loader/MiniLoader';
 
 
 function Cart() {
@@ -52,6 +54,10 @@ function Cart() {
     useEffect(() => {
         downloadCartProducts(cart);
     }, [cart])
+    
+    if(!cart) {
+        return <Loader/>
+    }
 
   return (
     <>
@@ -63,14 +69,15 @@ function Cart() {
                         <div className="order-details d-flex flex-column" id="orderDetails">
                             <div className="order-details-title text-muted">Order Details</div>
                                 {/* order detail card */}
-                                {products.length > 0 && products.map(product => <OrderDetailsProduct 
+                                {products.length > 0 ? products.map(product => <OrderDetailsProduct 
                                     key={product.id} 
                                     title={product.title}
                                     image={product.image}
                                     price={product.price}
                                     quantity={product.quantity}
                                     onRemove={() => onProductUpdate(product.id, 0)}
-                                />)}
+                                />) : <OrderDetailsProduct title={<MiniLoader/>}/>
+                                }
                         </div>    
                 </div>
                 <div className="col-12 col-lg-4 order-1 order-lg-2 mx-auto mb-5">

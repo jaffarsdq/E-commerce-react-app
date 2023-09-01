@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { getAllProducts, getAllProductsByCategory } from "../../apis/fakeStoreApi";
 import { useSearchParams } from "react-router-dom";
+import Loader from "../../components/loader/loader";
 
 function ProductList() {
     
@@ -34,14 +35,16 @@ function ProductList() {
         response(query.get('category'));
     },[query.get('category')])
   
-
+    if (!products) {
+        return <Loader/>;
+    }
 
     return (
         <>
            <ProductTitle word={query.get('category') || "All Products"}/>
             <div className="main container">
                 <div className="row  col-12  col-md-12 col-lg-3 search-products-wrapper mx-auto">
-                        <FilterProducts/>    
+                    <FilterProducts/>    
                 </div>
                 <div className="row col-12  col-md-10 col-lg-9 product-list-box d-flex flex-wrap mx-auto mt-4" id="product-list">
 

@@ -5,6 +5,7 @@ import './home.css'
 import Footer from '../../components/Footer/Footer';
 import CategoryItem from '../../components/categoryItem/CategoryItem'
 import useCategory from '../../hooks/useCategory';
+import MiniLoader from '../../components/loader/MiniLoader';
 
 
 function Home() {
@@ -23,12 +24,15 @@ function Home() {
             <div className="row product-list d-flex justify-content-center" 
                 id="categories-list">
                 <CategoryItem itemName={'All products'}/>
-                {categories && categories.map((category) => 
+                {(categories) ? categories.map((category) => 
                     <CategoryItem 
                         key={category} 
                         itemName={category}
                         filter={category}
-                    />)}
+                    />) : <CategoryItem 
+                             itemName={<MiniLoader/>}
+                          />
+                }
             </div>
         </div>
         <div className="display-6 col text-center">

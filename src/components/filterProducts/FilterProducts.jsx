@@ -1,6 +1,7 @@
 import React from 'react'
 import useCategory from '../../hooks/useCategory';
 import { useNavigate } from 'react-router-dom';
+import MiniLoader from '../loader/MiniLoader'
 
 import './FilterProducts.css'
 
@@ -29,11 +30,14 @@ function FilterProducts() {
             <h6 className="fs-6 text-muted">Categories</h6>
         </div>
         <div className="col categories text-center" id="categoryList">
-            {categories && categories.map((category) => 
+            {categories ? categories.map((category) => 
                 <a onClick={() => handleCategoryClick(category)} key={category} className="category col-md-12 text-capitalize">
                     {category}
                 </a>
-            )}
+            ) : <a className="category col-md-12 text-capitalize">
+                    {<MiniLoader/>}
+                </a>
+            }
         </div>
         <div className="col mt-2">
             <h6 className="col fs-6 text-muted">Filter by price</h6>   
