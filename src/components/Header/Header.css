@@ -7,10 +7,6 @@
     letter-spacing: 0.5rem;
 }
 
-.cart:hover {
-    text-decoration-line: underline;
-}
-
-.nav-brand {
-    letter-spacing: 0.5rem;
+.logo:hover {
+    transform:rotateZ(20deg);
 }
