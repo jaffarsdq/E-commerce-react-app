@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 //context import
@@ -11,9 +11,8 @@ import { getProduct, updateProductInCart } from '../../apis/fakeStoreApi';
 import './cart.css'
 
 //component import
-import OrderDetailsProduct from '../../components/orderDetailProduct/OrderDetailsProduct'
-import ProductTitle from '../../components/pageTitle/PageTitle'
-import Loader from '../../components/loader/loader';
+import OrderDetailsProduct from '../../components/orderDetailProduct/OrderDetailsProduct';
+import ProductTitle from '../../components/pageTitle/PageTitle';
 import MiniLoader from '../../components/loader/MiniLoader';
 
 
@@ -23,6 +22,24 @@ function Cart() {
     const {cart, setCart} = useContext(CartContext);
     const {user} = useContext(UserContext);
     const [products, setProducts] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [discount, setDiscount] = useState(0);
+    const [discountedTotalPrice, setDiscountedTotalPrice] = useState(0)
+
+    // Calculate the total price, discount, and discounted total price when items or their quantities change
+  useEffect(() => {
+    const calculatedTotalPrice = products && products.reduce((accumulator, item) => {
+      const itemTotalPrice = Math.round(item.price* 50 * item.quantity);
+      return accumulator + itemTotalPrice;
+    }, 0);
+
+    const calculatedDiscount = Math.round(calculatedTotalPrice * 0.1); // 10% discount
+    const calculatedDiscountedTotalPrice = calculatedTotalPrice - calculatedDiscount;
+
+    setTotalPrice(calculatedTotalPrice);
+    setDiscount(calculatedDiscount);
+    setDiscountedTotalPrice(calculatedDiscountedTotalPrice);
+  }, [products]);
 
     function navigate() {
         return  navigator('/products');
@@ -53,12 +70,8 @@ function Cart() {
 
     useEffect(() => {
         downloadCartProducts(cart);
-        console.log(products.price)
     }, [cart])
     
-    if(!cart) {
-        return <Loader/>
-    }
 
   return (
     <>
@@ -72,12 +85,20 @@ function Cart() {
                                 {/* order detail card */}
                                 {products.length > 0 ? products.map(product => <OrderDetailsProduct 
                                     key={product.id} 
+                                    id={product.id}
                                     title={product.title}
                                     image={product.image}
                                     price={product.price}
                                     quantity={product.quantity}
                                     onRemove={() => onProductUpdate(product.id, 0)}
-                                />) : <OrderDetailsProduct title={<MiniLoader/>}/>
+                                />) : (user && cart && cart.products.length === 0) ? 
+                                <div className='d-flex justify-content-center text-danger'>
+                                    try to add some products
+                                </div> : (!user) ? 
+                                <div className='d-flex justify-content-center text-danger'>
+                                    Please Login in to add some products
+                                </div> :
+                                <MiniLoader/>
                                 }
                         </div>    
                 </div>
@@ -90,11 +111,11 @@ function Cart() {
                                         <div className="price-details-item d-flex flex-row justify-content-between">
                                             <div>Price</div>
                                             {/* Price */}
-                                            <div id="total-price">&#8377;1000</div>
+                                            <div id="total-price">&#8377;{totalPrice}</div>
                                         </div>
                                         <div className="price-details-item d-flex flex-row justify-content-between">
                                             <div>Discount</div>
-                                            <div className='text-success'>- &#8377;10</div>
+                                            <div className='text-success'>- &#8377;{discount}</div>
                                         </div>
                                         <div className="price-details-item d-flex flex-row justify-content-between">
                                             <div>Delivery Charges</div>
@@ -103,7 +124,7 @@ function Cart() {
                                         <div className="price d-flex flex-row justify-content-between">
                                             <div>Total Amount</div>
                                             {/* total price */}
-                                            <div id="net-price">&#8377;990</div>
+                                            <div id="net-price">&#8377;{discountedTotalPrice}</div>
                                         </div>
                                     </div>
                                 </div>

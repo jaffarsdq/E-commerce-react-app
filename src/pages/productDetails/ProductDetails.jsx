@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 //react router imports
 import { useNavigate, useParams } from 'react-router-dom'
@@ -61,7 +61,7 @@ function ProductDetails() {
                     {product.title}
                 </h3>
                 <h3 className="fw-normal text-success py-2" id="productPrice">
-                    &#8377;{product.price}
+                    &#8377;{Math.round(product.price * 50)}
                 </h3>
                 <h4 className="text-muted fw-light fs-5">
                     Description

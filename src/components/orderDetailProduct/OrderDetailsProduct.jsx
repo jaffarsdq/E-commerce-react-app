@@ -1,8 +1,9 @@
-import React from 'react'
-
+// eslint-disable-next-line react/prop-types
 function OrderDetailsProduct({ image, title, price, quantity,  onRemove}) {
 
     const quantityAvailable = [1,2,3,4,5,6,7,8,9,10];
+
+    
 
   return (
     <div className="d-md-flex order-details-product text-center  text-md-start">
@@ -11,14 +12,18 @@ function OrderDetailsProduct({ image, title, price, quantity,  onRemove}) {
         </div>
         <div className="order-details-product-data my-1 col-12 col-md-6">
             <div>{title}</div>
-            <div>&#8377; {price}</div>
+            <div>&#8377; {Math.round(price * 50)}</div>
         </div>
         <div className="order-details-product-actions my-1 col-12 col-md-3">
             <div className="order-details-product-quantity">
                 <div className="fw-bold my-2">Quantity</div>
                 <div className="form-group">
-                    <select name="" id="" className="form-select">
-                    {quantityAvailable.map((id) => <option selected={quantity == id} value={id} key={id}>{id}</option>)}
+                    <select 
+                        className="form-select"
+                        value={quantity}
+                        // onChange={(e) => handleQuantityChange(e)}
+                    >
+                    {quantityAvailable.map((id) => <option value={id} key={id}>{id}</option>)}
                     </select>
                 </div>
             </div>

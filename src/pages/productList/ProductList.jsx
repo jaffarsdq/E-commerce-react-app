@@ -33,7 +33,7 @@ function ProductList() {
     
     useEffect(() => {
         response(query.get('category'));
-    },[query.get('category')])
+    },[query])
   
     if (!products) {
         return <Loader/>;
@@ -54,7 +54,7 @@ function ProductList() {
                             key={product.id} 
                             productImage={product.image} 
                             name={shrink(product.title)}
-                            price={product.price}
+                            price={Math.round(product.price * 50)}
                             id={product.id}
                         />
                     )}
