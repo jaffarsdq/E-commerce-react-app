@@ -16,7 +16,7 @@ function ProductBox({productImage, name, price, id}) {
                     <h6>{name}</h6>
                     <div className="d-flex justify-content-center align-items-center">
                         <p className='my-auto'> &#8377; {price}</p>
-                        <i class="bi bi-arrow-up-right-square  ms-auto me-3 icon"></i>
+                        <i className="bi bi-arrow-up-right-square  ms-auto me-3 icon"></i>
                     </div>
                 </div>
             </div>
