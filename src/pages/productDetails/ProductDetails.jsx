@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import ReactStars from "react-rating-stars-component";
 
 //react router imports
 import { useNavigate, useParams } from 'react-router-dom'
@@ -48,15 +49,15 @@ function ProductDetails() {
     }
 
   return (
-    <div className="product-details-wrapper container my-5">
-        <div className="row col-11 mx-auto justify-content-between">
-            <div className="col-sm-6 col-md-12 col-lg-5 col-xl-5 d-flex justify-content-around">
+    <div className="product-details-wrapper container">
+        <div className="row col-11  justify-content-between">
+            <div className="col-sm-6 col-md-12 col-lg-5 col-xl-5">
                 <img className="img-fluid" 
                 src={product.image} 
                 alt="product" 
                 id="productImage"/>
             </div>
-            <div className="col-sm-6 col-md-12 col-lg-6 col-xl-6 me-5 d-flex flex-column justify-content-between py-2">
+            <div className="col-sm-6 col-md-12 col-lg-6 col-xl-6 d-flex flex-column justify-content-between py-2">
                 <h3 className="display-5 fw-normal fs-1" id="productTitle">
                     {product.title}
                 </h3>
@@ -66,22 +67,44 @@ function ProductDetails() {
                 <h4 className="text-muted fw-light fs-5">
                     Description
                 </h4>
-                <p className="lead text-break" id="productDescription">
+                <p className="text-break" id="productDescription">
                     {product.description}
                 </p>
-                <h3 className="lead">
+                <h3 className="lead d-flex gap-2 align-items-center">
                     rating : <strong>{product.rating.rate}</strong>
+                    <ReactStars
+                        count={5}
+                        value={Math.round(product.rating.rate)}
+                        size={30}
+                        activeColor="#ffd700"
+                    />
                 </h3>
                 <h3 className="lead py-3">
                     rated by <strong>{product.rating.count}</strong> people
                 </h3>
                 <div className="row d-flex justify-content-around g-0">
-                    <button className="col-md-6 p-2 m-1 btn btn-primary" onClick={addProductToCart}>
-                        <i className="bi bi-plus"></i> Add to cart
+
+                    {(!user) ? 
+                        <div className="text-danger text-center">
+                            Please Login to add the product to the cart
+                        </div> : 
+                        null
+                    }
+
+                    {user && 
+                        <Link 
+                            to={`/cart/${user && user.id}`} 
+                            className="col-md-5 p-2 m-1 btn btn-dark">
+                                <i className="bi bi-cart3"></i> Go to cart
+                        </Link>}
+
+                        <button 
+                            className={`col-md-6 p-2 m-1 btn btn-action text-white
+                                ${(!user) ? 'cursor' : null}`
+                            } 
+                            onClick={addProductToCart}>
+                                <i className="bi bi-plus"></i> Add to cart
                     </button>
-                    <Link to={`/cart/${user && user.id}`} className="col-md-5 p-2 m-1 btn btn-warning">
-                        <i className="bi bi-cart3"></i> Go to cart
-                    </Link>
                 </div>
 
             </div>

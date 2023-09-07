@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
+
 html {
     box-sizing: border-box;
     border: 0;
@@ -11,5 +13,10 @@ html {
 
 :root {
     --cloudy: #e3f2fd;
+    --cloudy-hover: #b3d1ed;
     --blue: rgb(27, 92, 206);
+    --action: #3572db;
+    --action-bg-img: linear-gradient(300deg, #1f4890 0%, #3a84de 74%);
+    --action-hover: #29539b;
+    --action-bg-img-hover: linear-gradient(315deg, #376bc6 0%, #203c75 74%);
 }

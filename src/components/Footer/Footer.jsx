@@ -3,7 +3,7 @@ import './Footer.css'
 function Footer() {
 
   return (
-    <footer className={'footer-section mt-2 fixed-bottom'}>
+    <footer className={'footer-section'}>
         <div className='copyrights'>
           &#169; Jaffar Sadhiq
         </div>

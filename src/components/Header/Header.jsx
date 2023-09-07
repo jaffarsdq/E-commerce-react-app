@@ -1,5 +1,5 @@
 //library import
-import {useContext, useEffect} from 'react'
+import {useContext, useEffect, useState} from 'react'
 
 import logo from '/logo.svg'
 
@@ -14,10 +14,22 @@ import UserContext from '../../context/UserContext';
 import CartContext from '../../context/CartContext';
 
 function Header() {
-
+    
+    // eslint-disable-next-line no-unused-vars
     const [token, setToken, removeToken] = useCookies(['jwt-token']);
     const {user, setUser} = useContext(UserContext);
     const {cart, setCart} = useContext(CartContext);
+    const [scroll, setScroll] = useState(false);
+
+    function checkScrollPosition() {
+        const scrollY = window.scrollY;
+      
+        if (scrollY > 80) {
+          setScroll(true);
+        } else {
+            setScroll(false);
+        }
+      }
 
     function logout() {
         removeToken('jwt-token', {httpOnly: true});
@@ -27,11 +39,12 @@ function Header() {
       }
     
       useEffect(() => {
+        window.addEventListener('scroll', checkScrollPosition);
       }, [token]);
 
   return (
-    <div className="header">
-        <nav className="navbar navbar-expand-lg">
+    <div className="header position-relative">
+        <nav className={` ${(scroll) ? 'navbar navbar-expand-lg fixed-top shadow-sm' : 'navbar navbar-expand-lg'}`}>
             <div className="container">
                 <Link 
                     to={'/'} 
@@ -57,57 +70,41 @@ function Header() {
                         
                         <li className="m-auto">
                             {user && 
-                                <div className="text-capitalize">
+                                <div className="text-capitalize user-name">
                                     {user.username}
                                 </div>
                             }
                         </li>
 
-                        <li className="nav-item dropdown">
+                        <Link 
+                            to={`./cart/${user && user.id}`} 
+                            className="mx-3 text-dark text-decoration-none">
 
-                            <a 
-                                className="nav-link dropdown-toggle" 
-                                href="#" 
-                                role="button" 
-                                data-bs-toggle="dropdown" 
-                                aria-expanded="false">
-                                    Options
-                            </a>      
-
-                            <ul className="dropdown-menu">
-                                
-                                <Link 
-                                    to={`./cart/${user && user.id}`} 
-                                    className="dropdown-item">
-
-                                    <li  
-                                        className="nav-link cart position-relative text-center" 
-                                        aria-current="page" 
-                                        href="#">
-                                            <i className="bi bi-bag"></i> Cart
-                                            <span 
-                                                className="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
-                                                    {cart && cart.products && `${cart.products.length}`}
-                                            </span>
-                                    </li>
-                                </Link>
-                                
-                                {token['jwt-token'] ? 
-                                    <Link 
-                                        onClick={() => {logout()}} 
-                                        to="/Login" 
-                                        className='dropdown-item text-center text-danger text-decoration-none'>
-                                            Logout
-                                    </Link> :
-                                    <Link 
-                                        className='dropdown-item text-center text-success text-decoration-none' 
-                                        to="/login">
-                                            Login
-                                    </Link>
-                                }    
-
-                            </ul>
-                        </li>             
+                            <li  
+                                className="nav-link cart position-relative text-center" 
+                                aria-current="page" 
+                                href="#">
+                                    <i className="bi bi-bag"></i> Cart
+                                    <span 
+                                        className="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {cart && cart.products && `${cart.products.length}`}
+                                    </span>
+                            </li>
+                        </Link>
+                        
+                        {token['jwt-token'] ? 
+                            <Link 
+                                onClick={() => {logout()}} 
+                                to="/Login" 
+                                className='my-auto mx-1text-center text-danger text-decoration-none'>
+                                    Logout
+                            </Link> :
+                            <Link 
+                                className='my-auto mx-1text-center text-success text-decoration-none' 
+                                to="/login">
+                                    Login
+                            </Link>
+                        }                
                     </ul>
                 </div>
             </div>

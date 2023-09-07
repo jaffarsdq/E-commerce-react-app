@@ -3,7 +3,7 @@ import useCategory from '../../hooks/useCategory';
 import { useNavigate } from 'react-router-dom';
 import MiniLoader from '../loader/MiniLoader'
 
-import './FilterProducts.css'
+import './filterProducts.css'
 
 function FilterProducts() {
 
@@ -19,7 +19,7 @@ function FilterProducts() {
     }
 
   return (
-    <div className="col-10 col-md-10 col-lg-12  mx-auto search-products-wrapper">
+    <div className="col-10 col-md-10 col-lg-10  mx-auto search-products-wrapper">
         <div className="col">
             <h6 htmlFor="search-products" className="form-label text-muted">
                 Search products   
@@ -65,12 +65,12 @@ function FilterProducts() {
             </div>
         </div>
         <div className="col mb-2">
-            <div className="d-grid col-12 mb-3">
-                <button className="btn btn-warning" id="search-btn">
-                    <i className="bi bi-search"></i> Search
+            <div className="d-flex mb-3 justify-content-around">
+                <button className="co-6 btn btn-danger clear-btn" id="clear-btn">
+                    <i className="bi bi-stars"></i> Clear
                 </button>
-                <button className="btn btn-danger mt-1" id="clear-btn">
-                    <i className="bi bi-stars"></i> Clear Filters
+                <button className="col-6 btn search-btn text-white" id="search-btn">
+                    <i className="bi bi-search"></i> Search
                 </button>
             </div>
         </div>

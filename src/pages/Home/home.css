@@ -1,21 +1,49 @@
+.hero {
+    margin-top: 5rem;
+    min-height: 80vh;
+}
+
+
 .all-products {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--blue);
+    /* background-color: var(--violet); */
+    background-color: var(--action);
+    background-image: var(--action-bg-img);
     color: white;
     height: 100px;
     width: 200px;
     border-radius: 2rem;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4); 
     text-decoration: none;
+    transition: all 500ms ease;
 }
 
 .all-products:hover {
     box-shadow: none;
+    background-color: var(--action-hover);
+    background-image: var(--action-bg-img-hover);
 }
 
 .welcome {
     padding: 2rem;
     letter-spacing: 1rem;
+    font-family: 'Merienda', cursive;
+    font-size: 2.4em;
+}
+.welcome-note {
+    color: var(--action);
+    background: var(--action-bg-img);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@media (min-width : 768px) {
+    .welcome {
+        padding: 2rem;
+        letter-spacing: 1rem;
+        font-family: 'Merienda', cursive;
+        font-size: 5em;
+    }
 }

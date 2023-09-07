@@ -12,12 +12,12 @@ function ProductBox({productImage, name, price, id}) {
                 <div className="col-12 d-flex justify-content-center">
                     <img className="img-fluid" src={productImage} alt="product image"/>
                 </div>
-                <div className="col-12 text-center d-flex flex-column mt-2">
+                <div className="col-12 text-start d-flex flex-column mt-1 mx-2">
                     <h6>{name}</h6>
-                    <p> &#8377; {price}</p>
-                    <button className="btn btn-primary">
-                        Product Details
-                    </button>
+                    <div className="d-flex justify-content-center align-items-center">
+                        <p className='my-auto'> &#8377; {price}</p>
+                        <i class="bi bi-arrow-up-right-square  ms-auto me-3 icon"></i>
+                    </div>
                 </div>
             </div>
         </Link>

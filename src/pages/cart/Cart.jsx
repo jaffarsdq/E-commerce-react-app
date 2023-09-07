@@ -134,7 +134,7 @@ function Cart() {
                                 >
                                 <i className="bi bi-chevron-right"></i> Continue Shopping
                                 </a>
-                                <a className="btn btn-primary checkout-btn text-decoration-none">
+                                <a className="btn btn-dark checkout-btn text-decoration-none">
                                 <i className="bi bi-cart-check"></i> Checkout
                                 </a>
                             </div>

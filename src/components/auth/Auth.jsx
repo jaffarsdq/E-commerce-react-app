@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useImperativeHandle} from 'react'
+import { useLocation } from 'react-router-dom'
 
 function Auth({onSubmit}, ref) {
+    const location = useLocation();
 
     const [formDetails, setFormDetails] = useState({
         username: '',
@@ -56,7 +58,7 @@ function Auth({onSubmit}, ref) {
                 onChange={(e)=> updateUsername(e.target.value)}
             />
         </div>
-        <div className="input-group">
+        <div className={`${(location.pathname === '/signup') ? 'input-group' : 'd-none'}`}>
             <input 
                 type="email" 
                 className="form-control" 
@@ -77,7 +79,7 @@ function Auth({onSubmit}, ref) {
             />
         </div>
         <div className="input-group">
-            <button className="form-control btn btn-primary" 
+            <button className="form-control btn btn-dark" 
                     onClick={onFormSubmit} 
                     type="button"
                     disabled={formDetails.isLoading}>

@@ -4,10 +4,10 @@ import React from 'react'
 function ProductTile({word}) {
 
   return (
-    <div className="container my-4">
+    <div className="container mt-5 pt-3">
         <div className="main row">
-            <div className="display-1 welcome col fs-1 text-center text-capitalize">
-                <strong>{word.slice(0,1)}</strong>{word.slice(1)}
+            <div className="welcome col fs-1 text-center text-capitalize">
+                <b className='fw-bolder'>{word.slice(0,1)}</b>{word.slice(1)}
             </div>
         </div>
     </div>

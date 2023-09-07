@@ -1,3 +1,10 @@
+.product-details-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #productImage {
    height: fit-content;
    max-height: 60vh;
@@ -6,4 +13,29 @@
 .btn-warning {
     text-decoration: none;
     color: black;
+}
+
+.cursor:hover {
+    cursor: not-allowed;
+}
+
+.btn-action {
+    background-color: var(--action);
+    background-image: var(--action-bg-img);
+    transition: all 500ms ease;
+}
+
+.btn-action:hover {
+    background-color: var(--action-hover);
+    background-image: var(--action-bg-img-hover);
+}
+
+@media (max-width: 768px) {
+    .product-details-wrapper {
+        margin-top: 5rem;
+        min-height: 150vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
