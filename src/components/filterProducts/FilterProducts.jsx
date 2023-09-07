@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import useCategory from '../../hooks/useCategory';
 import { useNavigate } from 'react-router-dom';
 import MiniLoader from '../loader/MiniLoader'
+import SearchContext from '../../context/SearchContext';
 
 import './filterProducts.css'
 
@@ -10,12 +11,18 @@ function FilterProducts() {
     const minPriceOptions = [0, 10, 20, 50, 100, 200];
     const maxPriceOptions = [10, 20, 50, 100, 200, 1000];
 
+    const {searchValue, setSearchValue} = useContext(SearchContext);
     const [categories] = useCategory();
 
     const navigate = useNavigate();
 
     function handleCategoryClick(category) {
         navigate(`/products?category=${category}`)
+        setSearchValue('');
+    }
+
+    function handleSearch(e) {
+        setSearchValue(e.target.value);
     }
 
   return (
@@ -24,12 +31,23 @@ function FilterProducts() {
             <h6 htmlFor="search-products" className="form-label text-muted">
                 Search products   
             </h6>
-            <input type="text" className="form-control" placeholder="Search by name" id="search-products" aria-describedby="search-bar"/>
+            <input 
+                type="text" 
+                className="form-control" 
+                placeholder="Search by name" 
+                id="search-products" 
+                aria-describedby="search-bar"
+                value={searchValue}
+                onChange={handleSearch}
+            />
         </div>
         <div className="col mt-2">
             <h6 className="fs-6 text-muted">Categories</h6>
         </div>
         <div className="col categories text-center" id="categoryList">
+                <a onClick={() => handleCategoryClick('')} key={'All-products'} className="category col-md-12 text-capitalize">
+                    All products
+                </a>
             {categories ? categories.map((category) => 
                 <a onClick={() => handleCategoryClick(category)} key={category} className="category col-md-12 text-capitalize">
                     {category}

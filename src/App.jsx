@@ -3,7 +3,8 @@ import Header from './components/Header/Header'
 //pages import
 import MainRoutes from './routes/MainRoutes'
 //contextImport
-import userContext from './context/UserContext.js'
+import UserContext from './context/UserContext.js'
+import SearchContext from './context/SearchContext'
 import CartContext from './context/CartContext'
 //library imports
 import { useEffect, useState } from 'react'
@@ -12,10 +13,12 @@ import { useCookies } from 'react-cookie'
 import jwt_decode from "jwt-decode";
 import { fetchUserCart } from './helper/fetchUserCartHelper'
 
+
 function App() {
 
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState(null);
+  const [searchValue, setSearchValue] = useState('');
   const [token, setToken] = useCookies(['jwt-token']);
 
    async function accessToken() {
@@ -45,12 +48,14 @@ function App() {
 
   return (
     <>
-      <userContext.Provider value={{user, setUser}}>
-      <CartContext.Provider value={{cart, setCart}}>
-      <Header/>
-      <MainRoutes />
-      </CartContext.Provider>
-      </userContext.Provider>
+      <UserContext.Provider value={{user, setUser}}>
+        <CartContext.Provider value={{cart, setCart}}>
+          <SearchContext.Provider value={{searchValue, setSearchValue}}>
+            <Header/>
+            <MainRoutes />
+          </SearchContext.Provider>
+        </CartContext.Provider>
+      </UserContext.Provider>
     </>
   )
 }
