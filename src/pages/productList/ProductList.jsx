@@ -9,12 +9,15 @@ import { getAllProducts, getAllProductsByCategory } from "../../apis/fakeStoreAp
 import { useSearchParams } from "react-router-dom";
 import Loader from "../../components/loader/loader";
 import SearchContext from "../../context/SearchContext";
+import FilterContext from "../../context/FilterContext";
 
 function ProductList() {
     
     const [products, setProducts] = useState();
     const [query] = useSearchParams();
-    const {searchValue} = useContext(SearchContext);
+    const {searchValue, setSearchValue} = useContext(SearchContext);
+    const {filterValue, setFilterValue} = useContext(FilterContext);
+    const [filtered, setFiltered] = useState('')
     
     const response = async function fetchproducts (category) {
         const downloadCategory = category ? getAllProductsByCategory(category) : getAllProducts(); 
@@ -22,17 +25,46 @@ function ProductList() {
         setProducts(response.data);
     }
 
-    const productsFilter = products && products.filter((product) =>
-    product.title.toLowerCase().includes(searchValue.toLowerCase())
-    );
+    // useEffect(() => {
+    //     if (products) {
+    //         const filteredProducts = products.filter((product) =>
+    //           product.title.toLowerCase().includes(searchValue.toLowerCase())
+    //         );
+    //         setFiltered(filteredProducts);
+    //     }
+    // }, [searchValue, products])
+
+    useEffect(() => {
+        if (products) {
+          const filteredByTitle = products.filter((product) =>
+            product.title.toLowerCase().includes(searchValue.toLowerCase())
+          );
+      
+          if (filterValue.maxPrice !== 0) {
+            const filteredByPrice = filteredByTitle.filter((product) =>
+              product.price >= filterValue.minPrice && product.price <= filterValue.maxPrice
+            );
+            setFiltered(filteredByPrice);
+          } else {
+            // If either minPrice or maxPrice is not set, show all products
+            setFiltered(filteredByTitle);
+          }
+        }
+      }, [searchValue, filterValue, products]);
+      
+      const clearFilters = () => {
+        setSearchValue('');
+        setFiltered('');
+        setFilterValue({minPrice : 0, maxPrice : 0})
+      }
 
     //funtion to shrink if the length of the title has more than 18 characters
-    function shrink (tit) {
+    function shrink (title) {
         let result = "";
-        if(tit.length > 18) {
-            result = tit.substring(0,18) + '...';
+        if(title.length > 18) {
+            result = title.substring(0,18) + '...';
         } else {
-            result = tit;
+            result = title;
         }
         return result;
     }
@@ -50,20 +82,20 @@ function ProductList() {
            <ProductTitle word={query.get('category') || "All Products"}/>
             <div className="main container">
                 <div className="row  col-12  col-md-12 col-lg-3 search-products-wrapper mx-auto">
-                    <FilterProducts/>    
+                    <FilterProducts clear={clearFilters}/>    
                 </div>
                 <div className="row col-12  col-md-10 col-lg-9 product-list-box d-flex flex-wrap mx-auto mt-4" id="product-list">
 
                     {/* <ProductBox productImage={reactImg} name={'dummy'} price={100}/> */}
-                    {products && productsFilter.length > 0 ? productsFilter.map((product) =>
+                    {products && filtered.length > 0 ? filtered.map((product) =>
                         <ProductBox 
                             key={product.id} 
                             productImage={product.image} 
                             name={shrink(product.title)}
-                            price={Math.round(product.price * 50)}
+                            price={Math.round(product.price)}
                             id={product.id}
                         />) :
-                        <div className="container col-9 col-sm-6 text-break">There are no products available by the name of <span className="text-danger">"{searchValue}"</span> ...</div>
+                        <div className="container col-9 col-sm-6 text-break text-danger">There are no items that match this filter.</div>
                     }
                 </div>
             </div>

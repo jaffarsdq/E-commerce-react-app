@@ -29,7 +29,7 @@ function Cart() {
     // Calculate the total price, discount, and discounted total price when items or their quantities change
   useEffect(() => {
     const calculatedTotalPrice = products && products.reduce((accumulator, item) => {
-      const itemTotalPrice = Math.round(item.price* 50 * item.quantity);
+      const itemTotalPrice = Math.round(item.price* item.quantity);
       return accumulator + itemTotalPrice;
     }, 0);
 
@@ -111,11 +111,11 @@ function Cart() {
                                         <div className="price-details-item d-flex flex-row justify-content-between">
                                             <div>Price</div>
                                             {/* Price */}
-                                            <div id="total-price">&#8377;{totalPrice}</div>
+                                            <div id="total-price">${totalPrice}</div>
                                         </div>
                                         <div className="price-details-item d-flex flex-row justify-content-between">
                                             <div>Discount</div>
-                                            <div className='text-success'>- &#8377;{discount}</div>
+                                            <div className='text-success'>- ${discount}</div>
                                         </div>
                                         <div className="price-details-item d-flex flex-row justify-content-between">
                                             <div>Delivery Charges</div>
@@ -124,7 +124,7 @@ function Cart() {
                                         <div className="price d-flex flex-row justify-content-between">
                                             <div>Total Amount</div>
                                             {/* total price */}
-                                            <div id="net-price">&#8377;{discountedTotalPrice}</div>
+                                            <div id="net-price">${discountedTotalPrice}</div>
                                         </div>
                                     </div>
                                 </div>

@@ -2,13 +2,13 @@
     cursor: pointer;
 }
 
-.search-btn {
+.clear-btn {
     background-color: var(--action);
     background-image: var(--action-bg-img);
     transition: all 300ms ease;
 }
 
-.search-btn:hover {
+.clear-btn:hover {
     background-color: var(--action-hover);
     background-image: var(--action-bg-img-hover);
 }

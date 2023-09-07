@@ -62,7 +62,7 @@ function ProductDetails() {
                     {product.title}
                 </h3>
                 <h3 className="fw-normal text-success py-2" id="productPrice">
-                    &#8377;{Math.round(product.price * 50)}
+                    ${Math.round(product.price)}
                 </h3>
                 <h4 className="text-muted fw-light fs-5">
                     Description

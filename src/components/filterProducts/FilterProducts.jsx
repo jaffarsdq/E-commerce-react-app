@@ -2,27 +2,38 @@ import React, { useContext } from 'react'
 import useCategory from '../../hooks/useCategory';
 import { useNavigate } from 'react-router-dom';
 import MiniLoader from '../loader/MiniLoader'
-import SearchContext from '../../context/SearchContext';
 
 import './filterProducts.css'
+import FilterContext from '../../context/FilterContext';
+import SearchContext from '../../context/SearchContext';
 
-function FilterProducts() {
+function FilterProducts({clear}) {
 
-    const minPriceOptions = [0, 10, 20, 50, 100, 200];
-    const maxPriceOptions = [10, 20, 50, 100, 200, 1000];
+    const minPriceOptions = [0, 10, 20, 50, 100, 200, 500];
+    const maxPriceOptions = [0, 10, 20, 50, 100, 200, 500, 1000];
 
     const {searchValue, setSearchValue} = useContext(SearchContext);
     const [categories] = useCategory();
+    const {filterValue, setFilterValue} = useContext(FilterContext);
 
     const navigate = useNavigate();
 
-    function handleCategoryClick(category) {
-        navigate(`/products?category=${category}`)
-        setSearchValue('');
+    function handleMinValue(e) {
+        setFilterValue({...filterValue, minPrice : e.target.value})
+        console.log(filterValue);
+    }
+    function handleMaxValue(e) {
+        setFilterValue({...filterValue, maxPrice : e.target.value})
+        console.log(filterValue);
     }
 
     function handleSearch(e) {
         setSearchValue(e.target.value);
+    }
+
+    function handleCategoryClick(category) {
+        navigate(`/products?category=${category}`)
+        setSearchValue('')
     }
 
   return (
@@ -46,7 +57,7 @@ function FilterProducts() {
         </div>
         <div className="col categories text-center" id="categoryList">
                 <a onClick={() => handleCategoryClick('')} key={'All-products'} className="category col-md-12 text-capitalize">
-                    All products
+                    All Products
                 </a>
             {categories ? categories.map((category) => 
                 <a onClick={() => handleCategoryClick(category)} key={category} className="category col-md-12 text-capitalize">
@@ -64,7 +75,11 @@ function FilterProducts() {
             <div className="row">
                 <div className="col-6">
                     <div className="form-group">
-                        <select name="minPrice" id="minPrice" className="form-select">
+                        <select 
+                            name="minPrice" id="minPrice" 
+                            className="form-select"
+                            value={filterValue.minPrice}
+                            onChange={handleMinValue}>
                         {minPriceOptions.map(optionValue => 
                                 <option key={optionValue} value={optionValue}>{optionValue}</option>)}
                         </select>
@@ -73,7 +88,12 @@ function FilterProducts() {
                 </div>
                 <div className="col-6">
                     <div className="form-group">
-                        <select name="maxPrice" id="maxPrice" className="form-select">
+                        <select 
+                            name="maxPrice" 
+                            id="maxPrice" 
+                            className="form-select"
+                            value={filterValue.maxPrice}
+                            onChange={handleMaxValue}>
                         {maxPriceOptions.map(optionValue => 
                                 <option key={optionValue} value={optionValue}>{optionValue}</option>)}
                         </select>
@@ -84,11 +104,11 @@ function FilterProducts() {
         </div>
         <div className="col mb-2">
             <div className="d-flex mb-3 justify-content-around">
-                <button className="co-6 btn btn-danger clear-btn" id="clear-btn">
-                    <i className="bi bi-stars"></i> Clear
-                </button>
-                <button className="col-6 btn search-btn text-white" id="search-btn">
-                    <i className="bi bi-search"></i> Search
+                <button 
+                    className="col-12 btn clear-btn text-white" 
+                    id="clear-btn"
+                    onClick={clear}>
+                    <i className="bi bi-stars"></i> Clear Filters
                 </button>
             </div>
         </div>

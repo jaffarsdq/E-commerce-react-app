@@ -12,6 +12,7 @@ import axios from 'axios'
 import { useCookies } from 'react-cookie'
 import jwt_decode from "jwt-decode";
 import { fetchUserCart } from './helper/fetchUserCartHelper'
+import FilterContext from './context/FilterContext'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState(null);
   const [searchValue, setSearchValue] = useState('');
+  const [filterValue, setFilterValue] = useState({minPrice : 0 , maxPrice : 0});
   const [token, setToken] = useCookies(['jwt-token']);
 
    async function accessToken() {
@@ -51,8 +53,10 @@ function App() {
       <UserContext.Provider value={{user, setUser}}>
         <CartContext.Provider value={{cart, setCart}}>
           <SearchContext.Provider value={{searchValue, setSearchValue}}>
-            <Header/>
-            <MainRoutes />
+            <FilterContext.Provider value={{filterValue, setFilterValue}}>
+              <Header/>
+              <MainRoutes />
+            </FilterContext.Provider>
           </SearchContext.Provider>
         </CartContext.Provider>
       </UserContext.Provider>
