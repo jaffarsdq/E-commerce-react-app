@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 //context import
 import CartContext from '../../context/CartContext';
 import UserContext from '../../context/UserContext';
+
 //api import
 import { getProduct, updateProductInCart } from '../../apis/fakeStoreApi';
 
@@ -14,6 +15,7 @@ import './cart.css'
 import OrderDetailsProduct from '../../components/orderDetailProduct/OrderDetailsProduct';
 import ProductTitle from '../../components/pageTitle/PageTitle';
 import MiniLoader from '../../components/loader/MiniLoader';
+import QuantityContext from '../../context/QuantityContext.js';
 
 
 function Cart() {
@@ -25,11 +27,11 @@ function Cart() {
     const [totalPrice, setTotalPrice] = useState(0);
     const [discount, setDiscount] = useState(0);
     const [discountedTotalPrice, setDiscountedTotalPrice] = useState(0)
-
+    const {selectedQuantity} = useContext(QuantityContext);
     // Calculate the total price, discount, and discounted total price when items or their quantities change
   useEffect(() => {
     const calculatedTotalPrice = products && products.reduce((accumulator, item) => {
-      const itemTotalPrice = Math.round(item.price* item.quantity);
+      const itemTotalPrice = Math.round(item.price * item.quantity);
       return accumulator + itemTotalPrice;
     }, 0);
 
@@ -68,6 +70,7 @@ function Cart() {
         setCart({...response.data});
     }
 
+
     useEffect(() => {
         downloadCartProducts(cart);
     }, [cart])
@@ -84,12 +87,12 @@ function Cart() {
                             <div className="order-details-title text-muted">Order Details</div>
                                 {/* order detail card */}
                                 {products.length > 0 ? products.map(product => <OrderDetailsProduct 
-                                    key={product.id} 
-                                    id={product.id}
+                                    key={product.id}
                                     title={product.title}
                                     image={product.image}
                                     price={product.price}
                                     quantity={product.quantity}
+                                    onQuantity={() => onProductUpdate(product.id, selectedQuantity)}
                                     onRemove={() => onProductUpdate(product.id, 0)}
                                 />) : (user && cart && cart.products.length === 0) ? 
                                 <div className='d-flex justify-content-center text-danger'>

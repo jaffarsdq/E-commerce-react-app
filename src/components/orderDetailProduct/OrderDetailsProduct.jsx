@@ -1,9 +1,23 @@
+import { useContext } from "react";
+import QuantityContext from "../../context/QuantityContext.js";
+import CartContext from "../../context/CartContext.js";
+import { useEffect } from "react";
+
 // eslint-disable-next-line react/prop-types
-function OrderDetailsProduct({ image, title, price, quantity,  onRemove}) {
+function OrderDetailsProduct({image, title, price, quantity, onQuantity, onRemove}) {
 
     const quantityAvailable = [1,2,3,4,5,6,7,8,9,10];
 
-    
+    const {cart, setCart} = useContext(CartContext);
+    const {selectedQuantity, setSelectedQuantity} = useContext(QuantityContext);
+
+    const handleQuantityChange = (e) => {
+        setSelectedQuantity(Number(e.target.value));
+        onQuantity();
+        console.log('incoming',quantity,'selected',selectedQuantity)
+    } 
+
+    useEffect(() => {}, [cart]);
 
   return (
     <div className="d-md-flex order-details-product text-center  text-md-start">
@@ -20,10 +34,10 @@ function OrderDetailsProduct({ image, title, price, quantity,  onRemove}) {
                 <div className="form-group">
                     <select 
                         className="form-select"
-                        value={quantity}
-                        // onChange={(e) => handleQuantityChange(e)}
+                        selected={quantity}
+                        onChange={(handleQuantityChange)}
                     >
-                    {quantityAvailable.map((id) => <option value={id} key={id}>{id}</option>)}
+                    {quantityAvailable.map((val) => <option value={val} key={val}>{val}</option>)}
                     </select>
                 </div>
             </div>

@@ -76,7 +76,7 @@ function Header() {
                             }
                         </li>
 
-                        <Link 
+                        {user && <Link 
                             to={`./cart/${user && user.id}`} 
                             className="mx-3 text-dark text-decoration-none">
 
@@ -90,7 +90,7 @@ function Header() {
                                             {cart && cart.products && `${cart.products.length}`}
                                     </span>
                             </li>
-                        </Link>
+                        </Link>}
                         
                         {token['jwt-token'] ? 
                             <Link 
