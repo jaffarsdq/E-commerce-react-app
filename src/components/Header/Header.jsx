@@ -21,26 +21,27 @@ function Header() {
     const {cart, setCart} = useContext(CartContext);
     const [scroll, setScroll] = useState(false);
 
-    function checkScrollPosition() {
-        const scrollY = window.scrollY;
+    // function checkScrollPosition() {
+    //     const scrollY = window.scrollY;
       
-        if (scrollY > 80) {
-          setScroll(true);
-        } else {
-            setScroll(false);
-        }
-      }
+    //     if (scrollY > 80) {
+    //       setScroll(true);
+    //     } else {
+    //         setScroll(false);
+    //     }
+    //   }
 
     function logout() {
         removeToken('jwt-token', {httpOnly: true});
         axios.get(`${import.meta.env.VITE_BASE_URL}/logout`, {withCredentials: true});
         setUser(null);
         setCart(null);
+        console.log(token);
       }
     
       useEffect(() => {
-        window.addEventListener('scroll', checkScrollPosition);
-      }, [token]);
+        // window.addEventListener('scroll', checkScrollPosition);
+      }, [token, user]);
 
   return (
     <div className="header position-relative">
@@ -92,7 +93,7 @@ function Header() {
                             </li>
                         </Link>}
                         
-                        {token['jwt-token'] ? 
+                        {user ? 
                             <Link 
                                 onClick={() => {logout()}} 
                                 to="/Login" 

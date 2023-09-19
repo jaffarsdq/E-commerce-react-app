@@ -15,9 +15,10 @@
     "bootstrap-icons": "^1.10.5",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
-    "react-cookie": "^6.1.0",
+    "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.11",
+    "react-hook-form": "^7.46.1",
     "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^6.15.0"
   },
