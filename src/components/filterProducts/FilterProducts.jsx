@@ -63,8 +63,9 @@ function FilterProducts({clear}) {
                 <a onClick={() => handleCategoryClick(category)} key={category} className="category col-md-12 text-capitalize">
                     {category}
                 </a>
-            ) : <a className="category col-md-12 text-capitalize">
-                    {<MiniLoader/>}
+            ) : 
+                <a className="category col-md-12 text-capitalize">
+                {<MiniLoader/>}
                 </a>
             }
         </div>

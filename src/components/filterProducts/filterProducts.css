@@ -13,7 +13,7 @@
     background-image: var(--action-bg-img-hover);
 }
 
-@media (min-width:768px) {
+@media (min-width:769px) {
     .search-products-wrapper {
         position: sticky;
         top: 100px !important;

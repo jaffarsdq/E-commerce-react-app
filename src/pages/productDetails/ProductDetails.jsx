@@ -13,6 +13,8 @@ import { addProductToUserCart, getProduct } from '../../apis/fakeStoreApi';
 import UserContext from '../../context/UserContext';
 import CartContext from '../../context/CartContext';
 import Loader from '../../components/loader/loader';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function ProductDetails() {
 
@@ -51,11 +53,13 @@ function ProductDetails() {
   return (
     <div className="product-details-wrapper container">
         <div className="row col-11  justify-content-between">
-            <div className="col-sm-6 col-md-12 col-lg-5 col-xl-5">
-                <img className="img-fluid" 
+            <div className="col-sm-6 col-md-12 col-lg-5 col-xl-5 text-center">
+                <LazyLoadImage className="img-fluid" 
                 src={product.image} 
                 alt="product" 
-                id="productImage"/>
+                id="productImage"
+                effect="blur"
+                />
             </div>
             <div className="col-sm-6 col-md-12 col-lg-6 col-xl-6 d-flex flex-column justify-content-between py-2">
                 <h3 className="display-5 fw-normal fs-1" id="productTitle">

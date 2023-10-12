@@ -14,24 +14,34 @@ function Home() {
 
   return (
     <>
-        <div className="container-sm p-5 hero d-flex flex-column flex-lg-row justify-content-center align-items-center">
+        <div className="hero container-sm p-5 d-flex flex-column flex-lg-row justify-content-center align-items-center">
             <div className="main row">
-                <div className="col-lg-4 welcome mb-5 mx-2 mx-lg-4">
+                <div className="col-lg-3 col-xl-4 welcome mb-5 mx-2 mx-xl-4 text-center">
                     <span >Welcome</span> to <strong className='welcome-note'>S</strong>hoppy
                 </div>
             </div>
 
-            <div className="row col-lg-7 product-list d-flex justify-content-center" 
+            <div className="row col-lg-8 col-xl-7 product-list d-flex justify-content-center" 
                 id="categories-list">
-                <CategoryItem itemName={'All products'}/>
+                {(categories) ?  <CategoryItem itemName={'All products'}/> : null}
                 {(categories) ? categories.map((category) => 
                     <CategoryItem 
                     key={category} 
                     itemName={category}
                     filter={category}
-                    />) : <CategoryItem 
-                    itemName={<MiniLoader/>}
-                    />
+                    />) : 
+                    <>
+                        <CategoryItem 
+                    itemName={<MiniLoader/>}/>
+                        <CategoryItem 
+                    itemName={<MiniLoader/>}/>
+                        <CategoryItem 
+                    itemName={<MiniLoader/>}/>
+                        <CategoryItem 
+                    itemName={<MiniLoader/>}/>
+                        <CategoryItem 
+                    itemName={<MiniLoader/>}/>
+                    </>
                 }
             </div>
         </div>

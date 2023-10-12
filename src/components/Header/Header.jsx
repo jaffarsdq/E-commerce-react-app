@@ -2,6 +2,7 @@
 import {useContext, useEffect, useState} from 'react'
 
 import logo from '/logo.svg'
+import avatar from '/avatar.png'
 
 //css import
 import './Header.css'
@@ -72,7 +73,7 @@ function Header() {
                         <li className="m-auto">
                             {user && 
                                 <div className="text-capitalize user-name">
-                                    {user.username}
+                                    <img className='mb-1' src={avatar} alt="" width={16} height={16}/> {user.username}
                                 </div>
                             }
                         </li>

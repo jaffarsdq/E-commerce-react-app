@@ -1,6 +1,5 @@
 .hero {
-    margin-top: 3rem;
-    min-height: 80vh;
+    min-height: 83vh;
 }
 
 
@@ -44,6 +43,6 @@
         padding: 2rem;
         letter-spacing: 1rem;
         font-family: 'Merienda', cursive;
-        font-size: 5em;
+        font-size: 5rem;
     }
 }
