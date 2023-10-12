@@ -1,28 +1,28 @@
 import { useContext } from "react";
-import QuantityContext from "../../context/QuantityContext.js";
 import CartContext from "../../context/CartContext.js";
 import { useEffect } from "react";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 // eslint-disable-next-line react/prop-types
-function OrderDetailsProduct({image, title, price, quantity, onQuantity, onRemove}) {
+function OrderDetailsProduct({image, title, price, quantity, onRemove}) {
 
     const quantityAvailable = [1,2,3,4,5,6,7,8,9,10];
 
-    const {cart, setCart} = useContext(CartContext);
-    const {selectedQuantity, setSelectedQuantity} = useContext(QuantityContext);
+    const {cart} = useContext(CartContext);
 
-    const handleQuantityChange = (e) => {
-        setSelectedQuantity(Number(e.target.value));
-        onQuantity();
-        console.log('incoming',quantity,'selected',selectedQuantity)
-    } 
+    // const handleQuantityChange = (e) => {
+    //     setSelectedQuantity(Number(e.target.value));
+    //     onQuantity();
+    //     console.log('incoming',quantity,'selected',selectedQuantity)
+    // } 
 
     useEffect(() => {}, [cart]);
 
   return (
     <div className="d-md-flex order-details-product text-center  text-md-start">
         <div className="order-details-product-img my-1 col-12 col-md-3">
-            <img className='img-fluid' src={image} alt=""/>
+            <LazyLoadImage className='img-fluid' src={image} alt="product" effect="blur"/>
         </div>
         <div className="order-details-product-data my-1 col-12 col-md-6">
             <div>{title}</div>
@@ -34,10 +34,10 @@ function OrderDetailsProduct({image, title, price, quantity, onQuantity, onRemov
                 <div className="form-group">
                     <select 
                         className="form-select"
-                        selected={quantity}
-                        onChange={(handleQuantityChange)}
+                        name="quantity"
+                        
                     >
-                    {quantityAvailable.map((val) => <option value={val} key={val}>{val}</option>)}
+                    {quantityAvailable.map((val) => <option selected={quantity} key={val}>{val}</option>)}
                     </select>
                 </div>
             </div>

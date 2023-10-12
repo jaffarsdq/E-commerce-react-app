@@ -13,8 +13,6 @@ import { useCookies } from 'react-cookie'
 import jwt_decode from "jwt-decode";
 import { fetchUserCart } from './helper/fetchUserCartHelper'
 import FilterContext from './context/FilterContext'
-import QuantityContext from './context/QuantityContext'
-
 
 function App() {
 
@@ -23,8 +21,6 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
   const [filterValue, setFilterValue] = useState({minPrice : 0 , maxPrice : 0});
   const [token, setToken] = useCookies(['jwt-token']);
-  const [selectedQuantity, setSelectedQuantity] = useState(1);
-
 
    async function accessToken() {
       try {
@@ -57,10 +53,8 @@ function App() {
         <CartContext.Provider value={{cart, setCart}}>
           <SearchContext.Provider value={{searchValue, setSearchValue}}>
             <FilterContext.Provider value={{filterValue, setFilterValue}}>
-            <QuantityContext.Provider value={{ selectedQuantity, setSelectedQuantity }}>
               <Header/>
               <MainRoutes/>
-            </QuantityContext.Provider>
             </FilterContext.Provider>
           </SearchContext.Provider>
         </CartContext.Provider>

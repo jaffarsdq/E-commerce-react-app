@@ -15,7 +15,6 @@ import './cart.css'
 import OrderDetailsProduct from '../../components/orderDetailProduct/OrderDetailsProduct';
 import ProductTitle from '../../components/pageTitle/PageTitle';
 import MiniLoader from '../../components/loader/MiniLoader';
-import QuantityContext from '../../context/QuantityContext.js';
 
 
 function Cart() {
@@ -27,7 +26,7 @@ function Cart() {
     const [totalPrice, setTotalPrice] = useState(0);
     const [discount, setDiscount] = useState(0);
     const [discountedTotalPrice, setDiscountedTotalPrice] = useState(0)
-    const {selectedQuantity} = useContext(QuantityContext);
+
     // Calculate the total price, discount, and discounted total price when items or their quantities change
   useEffect(() => {
     const calculatedTotalPrice = products && products.reduce((accumulator, item) => {
@@ -92,7 +91,7 @@ function Cart() {
                                     image={product.image}
                                     price={product.price}
                                     quantity={product.quantity}
-                                    onQuantity={() => onProductUpdate(product.id, selectedQuantity)}
+                                    // onQuantity={() => onProductUpdate(product.id, selectedQuantity)}
                                     onRemove={() => onProductUpdate(product.id, 0)}
                                 />) : (user && cart && cart.products.length === 0) ? 
                                 <div className='d-flex justify-content-center text-danger'>
