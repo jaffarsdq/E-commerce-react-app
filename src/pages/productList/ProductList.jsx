@@ -10,9 +10,12 @@ import { useSearchParams } from "react-router-dom";
 import Loader from "../../components/loader/loader";
 import SearchContext from "../../context/SearchContext";
 import FilterContext from "../../context/FilterContext";
+import MiniLoader from "../../components/loader/MiniLoader";
+import LoadingCard from "../../components/LoadingCard/LoadingCard";
 
 function ProductList() {
     
+    const [isDownloading, setIsDownloading] = useState(false);
     const [products, setProducts] = useState();
     const [query] = useSearchParams();
     const {searchValue, setSearchValue} = useContext(SearchContext);
@@ -20,9 +23,11 @@ function ProductList() {
     const [filtered, setFiltered] = useState('')
     
     const response = async function fetchproducts (category) {
+        setIsDownloading(true);
         const downloadCategory = category ? getAllProductsByCategory(category) : getAllProducts(); 
         const response = await axios.get(downloadCategory);
         setProducts(response.data);
+        setIsDownloading(false);
     }
 
     // useEffect(() => {
@@ -85,18 +90,25 @@ function ProductList() {
                     <FilterProducts clear={clearFilters}/>    
                 </div>
                 <div className="row col-12  col-md-10 col-lg-9 product-list-box d-flex flex-wrap mx-auto mt-4" id="product-list">
-
+                    {isDownloading ? 
+                      <>
+                        <LoadingCard/>
+                        <LoadingCard/>
+                        <LoadingCard/>
+                        <LoadingCard/>
+                      </> :
+                        (products && filtered.length > 0) ? filtered.map((product) =>
+                          <ProductBox 
+                              key={product.id} 
+                              productImage={product.image} 
+                              name={shrink(product.title)}
+                              price={Math.round(product.price)}
+                              id={product.id}
+                          />) :
+                          <div className="container col-9 col-sm-6 text-break text-danger">There are no items that match this filter.</div>
+                        }
                     {/* <ProductBox productImage={reactImg} name={'dummy'} price={100}/> */}
-                    {products && filtered.length > 0 ? filtered.map((product) =>
-                        <ProductBox 
-                            key={product.id} 
-                            productImage={product.image} 
-                            name={shrink(product.title)}
-                            price={Math.round(product.price)}
-                            id={product.id}
-                        />) :
-                        <div className="container col-9 col-sm-6 text-break text-danger">There are no items that match this filter.</div>
-                    }
+                    
                 </div>
             </div>
         </>

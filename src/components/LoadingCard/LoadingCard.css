@@ -1,4 +1,6 @@
-
+.img-span {
+    height: 250px;
+}
 .card img{
     min-height: 140px;
     max-height:230px;
