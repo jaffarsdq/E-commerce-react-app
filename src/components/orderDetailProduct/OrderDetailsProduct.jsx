@@ -27,7 +27,7 @@ function OrderDetailsProduct({image, title, price, quantity, onRemove, onQuantit
         </div>
         <div className="order-details-product-data my-1 col-12 col-md-6">
             <div>{title}</div>
-            <div>$ {Math.round(price)}</div>
+            <div>$ {Math.round(price)} <span className="text-muted fw-light"> X {quantity} = {Math.round(price) * quantity}</span></div>
         </div>
         <div className="order-details-product-actions my-1 col-12 col-md-3">
             <div className="order-details-product-quantity">
