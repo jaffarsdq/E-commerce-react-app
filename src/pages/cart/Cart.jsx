@@ -1,4 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
+
+//axios import
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 //context import
@@ -16,35 +18,18 @@ import OrderDetailsProduct from '../../components/orderDetailProduct/OrderDetail
 import ProductTitle from '../../components/pageTitle/PageTitle';
 import MiniLoader from '../../components/loader/MiniLoader';
 
+//custom hook import
+import usePriceDetails from '../../hooks/usePriceDetails';
+
 
 function Cart() {
 
-    const navigator = useNavigate();
+    const navigate = useNavigate();
     const {cart, setCart} = useContext(CartContext);
     const {user} = useContext(UserContext);
     const [products, setProducts] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(0);
-    const [discount, setDiscount] = useState(0);
-    const [discountedTotalPrice, setDiscountedTotalPrice] = useState(0)
 
-    // Calculate the total price, discount, and discounted total price when items or their quantities change
-  useEffect(() => {
-    const calculatedTotalPrice = products && products.reduce((accumulator, item) => {
-      const itemTotalPrice = Math.round(item.price * item.quantity);
-      return accumulator + itemTotalPrice;
-    }, 0);
-
-    const calculatedDiscount = Math.round(calculatedTotalPrice * 0.1); // 10% discount
-    const calculatedDiscountedTotalPrice = calculatedTotalPrice - calculatedDiscount;
-
-    setTotalPrice(calculatedTotalPrice);
-    setDiscount(calculatedDiscount);
-    setDiscountedTotalPrice(calculatedDiscountedTotalPrice);
-  }, [products]);
-
-    function navigate() {
-        return  navigator('/products');
-    }
+    const [totalPrice, discount, discountedTotalPrice] = usePriceDetails(products);
     
     async function downloadCartProducts(cart) {
         if(!cart || !cart.products) return;
@@ -60,16 +45,20 @@ function Cart() {
         
         const downloadedProducts = productPromiseResponse.map(product => ({...product.data, quantity: productQuantityMapping[product.data.id]}));
         setProducts(downloadedProducts);
-
     }
 
     async function onProductUpdate(productId, quantity) {
-        if(!user) return;
-        const response = await axios.put(updateProductInCart(), {userId: user.id, productId, quantity});
-        setCart({...response.data});
+        if (!user) return;
+
+        // console.log("Updating product with ID:", productId, "to quantity:", quantity);
+      
+        const response = await axios.put(updateProductInCart(), { userId: user.id, productId, quantity });
+      
+        // console.log("API response:", response.data);
+      
+        setCart({ ...response.data });
     }
-
-
+      
     useEffect(() => {
         downloadCartProducts(cart);
     }, [cart])
@@ -91,7 +80,7 @@ function Cart() {
                                     image={product.image}
                                     price={product.price}
                                     quantity={product.quantity}
-                                    // onQuantity={() => onProductUpdate(product.id, selectedQuantity)}
+                                    onQuantityChange={(newQuantity) => onProductUpdate(product.id, newQuantity)}
                                     onRemove={() => onProductUpdate(product.id, 0)}
                                 />) : (user && cart && cart.products.length === 0) ? 
                                 <div className='d-flex justify-content-center text-danger'>
@@ -132,12 +121,12 @@ function Cart() {
                                 </div>
                             <div className="price-details-btn-group">
                                 <a className="btn continue-shopping-btn text-decoration-none"
-                                    onClick={navigate}    
+                                    onClick={() => navigate('/products')}    
                                 >
-                                <i className="bi bi-chevron-right"></i> Continue Shopping
+                                    <i className="bi bi-chevron-right"></i> Continue Shopping
                                 </a>
                                 <a className="btn btn-dark checkout-btn text-decoration-none">
-                                <i className="bi bi-cart-check"></i> Checkout
+                                    <i className="bi bi-cart-check"></i> Checkout
                                 </a>
                             </div>
                             
@@ -150,4 +139,4 @@ function Cart() {
   )
 }
 
-export default Cart
+export default Cart;

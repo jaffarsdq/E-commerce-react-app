@@ -3,21 +3,22 @@ import CartContext from "../../context/CartContext.js";
 import { useEffect } from "react";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
-function OrderDetailsProduct({image, title, price, quantity, onRemove}) {
+function OrderDetailsProduct({image, title, price, quantity, onRemove, onQuantityChange }) {
 
+    const [productQuantity, setProductQuantity] = useState(quantity);
     const quantityAvailable = [1,2,3,4,5,6,7,8,9,10];
 
     const {cart} = useContext(CartContext);
 
-    // const handleQuantityChange = (e) => {
-    //     setSelectedQuantity(Number(e.target.value));
-    //     onQuantity();
-    //     console.log('incoming',quantity,'selected',selectedQuantity)
-    // } 
+    const handleSelectChange = (event) => {
+        setProductQuantity(event.target.value);
+        onQuantityChange(event.target.value);
+    }
 
-    useEffect(() => {}, [cart]);
+    useEffect(() => {}, [cart, productQuantity]);
 
   return (
     <div className="d-md-flex order-details-product text-center  text-md-start">
@@ -35,9 +36,10 @@ function OrderDetailsProduct({image, title, price, quantity, onRemove}) {
                     <select 
                         className="form-select"
                         name="quantity"
-                        
+                        value={productQuantity}
+                        onChange={handleSelectChange}
                     >
-                    {quantityAvailable.map((val) => <option selected={quantity} key={val}>{val}</option>)}
+                        {quantityAvailable.map((val) => <option value={val} key={val}>{val}</option>)}
                     </select>
                 </div>
             </div>
@@ -47,4 +49,4 @@ function OrderDetailsProduct({image, title, price, quantity, onRemove}) {
   )
 }
 
-export default OrderDetailsProduct
+export default OrderDetailsProduct;
