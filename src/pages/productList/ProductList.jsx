@@ -12,6 +12,7 @@ import SearchContext from "../../context/SearchContext";
 import FilterContext from "../../context/FilterContext";
 import MiniLoader from "../../components/loader/MiniLoader";
 import LoadingCard from "../../components/LoadingCard/LoadingCard";
+import load from "/load.gif"
 
 function ProductList() {
     
@@ -101,6 +102,7 @@ function ProductList() {
                           <ProductBox 
                               key={product.id} 
                               productImage={product.image} 
+                              placeholder={load}
                               name={shrink(product.title)}
                               price={Math.round(product.price)}
                               id={product.id}

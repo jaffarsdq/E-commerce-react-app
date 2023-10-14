@@ -5,14 +5,23 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 //css import
 import './productBox.css'
+import { useState } from 'react';
 
-function ProductBox({productImage, name, price, id}) {
+function ProductBox({productImage,placeholder, name, price, id}) {
+
+    const [loading, setLoading] = useState(true);
+
+    const handleImageLoad = () => {
+        setLoading(false);
+    };
+
   return (      
     
       <Link  to={`/products/${id}`}  className="container col-9 col-sm-6 col-md-5 col-lg-4 col-xl-3 text-center">
             <div className="col-12  p-2 card ">
                 <div className="col-12 d-flex justify-content-center">
-                    <LazyLoadImage className="img-fluid" src={productImage} alt="product image" effect="blur"/>
+                    {loading && <img className='text-center' src={placeholder} alt="Loading" />}        
+                    <LazyLoadImage className="img-fluid" src={productImage} alt="product image" effect="blur" onLoad={handleImageLoad}/>
                 </div>
                 <div className="col-12 text-start d-flex flex-column mt-1 mx-2">
                     <h6>{name}</h6>
