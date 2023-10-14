@@ -1,102 +1,173 @@
-import React, { useEffect, useState, useImperativeHandle} from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
+import { useLocation } from 'react-router-dom';
 
-function Auth({onSubmit}, ref) {
-    const location = useLocation();
+function Auth({ onSubmit }, ref) {
+  const location = useLocation();
 
-    const [formDetails, setFormDetails] = useState({
-        username: '',
-        email: '', 
-        password: '',
-        isLoading: false,
-    })
+  const isSignup = location.pathname === '/signup';
 
-  function updateUsername(UpdatedUsername) {
-    setFormDetails({...formDetails, username: UpdatedUsername})
-  }
-
-  function updateEmail(updatedEmail) {
-    setFormDetails({...formDetails, email: updatedEmail})
-  }
-
-  function updatePassword(updatedPassword) {
-    setFormDetails({...formDetails, password: updatedPassword})
-  }
-
-  function onFormSubmit() {
-      setFormDetails({...formDetails, isLoading: true})
-      onSubmit(formDetails, resetForm);
-  }
-
-  function resetForm() {
-    setFormDetails({ username: '',
-    email: '', 
+  const [formDetails, setFormDetails] = useState({
+    username: '',
+    email: '',
     password: '',
-    isLoading: false,});
-  }
+    isLoading: false,
+  });
 
+  const [validationErrors, setValidationErrors] = useState({});
 
-  useImperativeHandle(ref, () => {
-    return {
-        resetFormData: resetForm
+  const validateForm = () => {
+    const errors = {};
+
+    // Username validation: lowercase and required
+    if (!formDetails.username) {
+      errors.username = 'Username is required';
+    } else if (!/^[a-z]+$/.test(formDetails.username)) {
+      errors.username = 'Username must be in lowercase';
     }
-    }, []);
 
-    useEffect(() => {
-        setFormDetails({email: '', password: '', username: '', isLoading: false});
-    }, [])
+    if (isSignup) {
+      // Email validation: basic pattern
+      if (!formDetails.email) {
+        errors.email = 'Email is required';
+      } else if (!/^\S+@\S+\.\S+$/.test(formDetails.email)) {
+        errors.email = 'Email is not valid';
+      }
+    }
+
+    // Password validation: at least 6 characters and one special character
+    if (!formDetails.password) {
+      errors.password = 'Password is required';
+    } else if (formDetails.password.length < 6 || !/[!@#$%^&*]/.test(formDetails.password)) {
+      errors.password = 'Password must be at least 6 characters with one special character';
+    }
+
+    setValidationErrors(errors);
+
+    // Return true if there are no errors, otherwise false
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    // Update the form details
+    setFormDetails({ ...formDetails, [name]: value });
+
+    // Validate the specific input
+    const errors = { ...validationErrors };
+    if (name === 'username') {
+      if (!value) {
+        errors.username = 'Username is required';
+      } else if (!/^[a-z]+$/.test(value)) {
+        errors.username = 'Username must be in lowercase';
+      } else {
+        delete errors.username;
+      }
+    } else if (name === 'email' && isSignup) {
+      if (!value) {
+        errors.email = 'Email is required';
+      } else if (!/^\S+@\S+\.\S+$/.test(value)) {
+        errors.email = 'Email is not valid';
+      } else {
+        delete errors.email;
+      }
+    } else if (name === 'password') {
+      if (!value) {
+        errors.password = 'Password is required';
+      } else if (value.length < 6 || !/[!@#$%^&*]/.test(value)) {
+        errors.password = 'Password must be at least 6 characters with one special character';
+      } else {
+        delete errors.password;
+      }
+    }
+
+    setValidationErrors(errors);
+  };
+
+
+  const onFormSubmit = () => {
+    if (validateForm()) {
+      setFormDetails({ ...formDetails, isLoading: true });
+      onSubmit(formDetails, resetForm);
+    }
+  };
+
+  const resetForm = () => {
+    setFormDetails({
+      username: '',
+      email: '',
+      password: '',
+      isLoading: false,
+    });
+    setValidationErrors({});
+  };
+
+  useImperativeHandle(ref, () => ({
+    resetFormData: resetForm,
+  }), []);
+
+  useEffect(() => {
+    resetForm();
+  }, []);
 
   return (
     <>
+        {validationErrors.username && <div className="error text-danger">{validationErrors.username}</div>}
         <div className="input-group">
-            <input 
-                type="text" 
-                className="form-control" 
-                placeholder="Username"
-                value={formDetails.username} 
-                id="loginUsername"  
-                onChange={(e)=> updateUsername(e.target.value)}
+            <input
+            type="text"
+            className="form-control"
+            placeholder="Username"
+            name="username"
+            value={formDetails.username}
+            onChange={handleInputChange}
             />
         </div>
-        <div className={`${(location.pathname === '/signup') ? 'input-group' : 'd-none'}`}>
-            <input 
-                type="email" 
-                className="form-control" 
-                placeholder="Email" 
+
+        {validationErrors.email && <div className="error text-danger">{validationErrors.email}</div>}
+        {location.pathname === '/signup' && (
+            <div className="input-group">
+            <input
+                type="email"
+                className="form-control"
+                placeholder="Email"
+                name="email"
                 value={formDetails.email}
-                id="loginEmail" 
-                onChange={(e)=> updateEmail(e.target.value)}
+                onChange={handleInputChange}
+            />
+            </div>
+        )}
+
+        {validationErrors.password && <div className="error text-danger">{validationErrors.password}</div>}
+        <div className="input-group">
+            <input
+            type="password"
+            className="form-control"
+            placeholder="Password"
+            name="password"
+            value={formDetails.password}
+            onChange={handleInputChange}
             />
         </div>
-        <div className="input-group">
-            <input 
-                type="password" 
-                className="form-control" 
-                placeholder="Password" 
-                value={formDetails.password}
-                id="loginPassword" 
-                onChange={(e)=> updatePassword(e.target.value)}
-            />
-        </div>
-        <div className="input-group">
-            <button className="form-control btn btn-dark" 
-                    onClick={onFormSubmit} 
-                    type="button"
-                    disabled={formDetails.isLoading}>
-                <span className={
-                        `spinner-grow 
-                        spinner-grow-sm
-                        ${(formDetails.isLoading)? '' : 'd-none'}`
-                    }
-                    aria-hidden="false">
-                </span>
-                <span role="status"> 
-                    {(formDetails.isLoading)? ' Loading...' : 'Submit'}
-                </span>
-            </button>
-        </div>
+
+      <div className="input-group">
+        <button
+          className="form-control btn btn-dark"
+          onClick={onFormSubmit}
+          type="button"
+          disabled={formDetails.isLoading}>
+          <span
+            className={`spinner-grow spinner-grow-sm ${formDetails.isLoading ? '' : 'd-none'}`}
+            aria-hidden="false"
+          />
+          <span role="status">
+            {formDetails.isLoading ? 'Loading...' : 'Submit'}
+          </span>
+        </button>
+      </div>
+      
     </>
-  )
+  );
 }
 
-export default React.forwardRef(Auth);
+export default forwardRef(Auth);
