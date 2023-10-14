@@ -45,7 +45,7 @@ function Home() {
                 }
             </div>
         </div>
-                <div className="sub text-center text-muted pt-5">
+                <div className="sub text-muted text-center">
                     Please select a catogery from above to continue
                 </div>
         <Footer/>
