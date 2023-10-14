@@ -13,6 +13,7 @@ import axios from 'axios';
 //context import
 import UserContext from '../../context/UserContext';
 import CartContext from '../../context/CartContext';
+import toast from 'react-hot-toast'
 
 function Header() {
     
@@ -37,12 +38,12 @@ function Header() {
         axios.get(`${import.meta.env.VITE_BASE_URL}/logout`, {withCredentials: true});
         setUser(null);
         setCart(null);
-        console.log(token);
-      }
-    
-      useEffect(() => {
-        // window.addEventListener('scroll', checkScrollPosition);
-      }, [token, user]);
+        toast.success('Logged out!')
+    }
+
+    useEffect(() => {
+    // window.addEventListener('scroll', checkScrollPosition);
+    }, [token, user]);
 
   return (
     <div className="header position-relative">

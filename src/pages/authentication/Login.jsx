@@ -11,6 +11,7 @@ import { useCookies } from 'react-cookie';
 import jwt_decode from "jwt-decode";
 import UserContext from '../../context/UserContext';
 
+import { toast } from "react-hot-toast";
 
 function Login() {
 
@@ -26,12 +27,14 @@ function Login() {
                 email: formDetails.email,
                 password: formDetails.password
             }, {withCredentials: true}); 
+            toast.success('logged in!')
             const tokenDetails = jwt_decode(response.data.token);
             setUser({username: tokenDetails.user, id: tokenDetails.id});
             setToken('jwt-token', response.data.token, {httpOnly:true});
             navigate('/');
         } catch (error) {
             authRef.current.resetFormData();
+            toast.error('Incorrect password or username, try again')
             console.log(error);
         }
     }

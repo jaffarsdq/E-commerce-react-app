@@ -15,6 +15,7 @@ import CartContext from '../../context/CartContext';
 import Loader from '../../components/loader/loader';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import toast from 'react-hot-toast';
 
 function ProductDetails() {
 
@@ -36,10 +37,15 @@ function ProductDetails() {
     }
 
     async function addProductToCart() {
-        if(!user) return;
-        const response = await axios.put(addProductToUserCart(), {userId: user.id, productId: id});
-        setCart({...response.data});
-        navigate(`/cart/${user.id}`);
+        try{
+            if(!user) return;
+            const response = await axios.put(addProductToUserCart(), {userId: user.id, productId: id});
+            setCart({...response.data});
+            navigate(`/cart/${user.id}`);
+            toast.success('Product added to cart')
+        } catch{
+            toast.error('Something went wrong, try again')
+        }
     }
 
     useEffect(() => {

@@ -21,6 +21,10 @@ import MiniLoader from '../../components/loader/MiniLoader';
 //custom hook import
 import usePriceDetails from '../../hooks/usePriceDetails';
 
+//toast import
+import toast from 'react-hot-toast';
+import { dismissLoadingToast, showLoadingToast } from '../../helper/loadingToast';
+
 
 function Cart() {
 
@@ -47,16 +51,24 @@ function Cart() {
         setProducts(downloadedProducts);
     }
 
-    async function onProductUpdate(productId, quantity) {
+    async function onProductUpdate(productId, quantity, message) {
+       try{
         if (!user) return;
-
+        showLoadingToast("Updating...");
         // console.log("Updating product with ID:", productId, "to quantity:", quantity);
       
         const response = await axios.put(updateProductInCart(), { userId: user.id, productId, quantity });
-      
+
         // console.log("API response:", response.data);
       
         setCart({ ...response.data });
+
+        dismissLoadingToast();
+        toast.success(message)
+       } catch {
+        dismissLoadingToast();
+        toast.error("Something went wrong")
+       }
     }
       
     useEffect(() => {
@@ -80,8 +92,8 @@ function Cart() {
                                     image={product.image}
                                     price={product.price}
                                     quantity={product.quantity}
-                                    onQuantityChange={(newQuantity) => onProductUpdate(product.id, newQuantity)}
-                                    onRemove={() => onProductUpdate(product.id, 0)}
+                                    onQuantityChange={(newQuantity, message) => onProductUpdate(product.id, newQuantity, message)}
+                                    onRemove={(message) => onProductUpdate(product.id, 0, message)}
                                 />) : (user && cart && cart.products.length === 0) ? 
                                 <div className='d-flex justify-content-center text-danger'>
                                     try to add some products

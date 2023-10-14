@@ -8,6 +8,8 @@ import { signup } from '../../apis/fakeStoreApi'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+import { toast } from "react-hot-toast";
+
 function Signup() {
 
     const navigate = useNavigate();
@@ -20,8 +22,10 @@ function Signup() {
                 password: authArguments.password
             });
             navigate('/login');
+            toast.success('Signed up Successfully')
         } catch(error) {
             console.log(error);
+            toast.error('Something went wrong, try again')
             resetForm();
         }
     }

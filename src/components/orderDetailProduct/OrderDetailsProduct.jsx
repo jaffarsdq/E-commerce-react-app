@@ -15,7 +15,7 @@ function OrderDetailsProduct({image, title, price, quantity, onRemove, onQuantit
 
     const handleSelectChange = (event) => {
         setProductQuantity(event.target.value);
-        onQuantityChange(event.target.value);
+        onQuantityChange(event.target.value, "Quantity updated");
     }
 
     useEffect(() => {}, [cart, productQuantity]);
@@ -43,7 +43,7 @@ function OrderDetailsProduct({image, title, price, quantity, onRemove, onQuantit
                     </select>
                 </div>
             </div>
-            <div className="order-details-product-remove btn btn-danger" onClick={onRemove}>Remove</div>
+            <div className="order-details-product-remove btn btn-danger" onClick={() =>onRemove("Product Removed")}>Remove</div>
         </div>
     </div>
   )
