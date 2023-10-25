@@ -7,10 +7,10 @@ import { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { getAllProducts, getAllProductsByCategory } from "../../apis/fakeStoreApi";
 import { useSearchParams } from "react-router-dom";
-import Loader from "../../components/loader/loader";
+import Loader from "../../components/loader/Loader";
 import SearchContext from "../../context/SearchContext";
 import FilterContext from "../../context/FilterContext";
-import MiniLoader from "../../components/loader/MiniLoader";
+
 import LoadingCard from "../../components/LoadingCard/LoadingCard";
 import load from "/load.gif"
 
