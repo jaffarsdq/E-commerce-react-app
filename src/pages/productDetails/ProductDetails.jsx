@@ -15,7 +15,7 @@ import CartContext from '../../context/CartContext';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import toast from 'react-hot-toast';
-import Loader from '../../components/loader/loader';
+import Loader from '../../components/loader/Loader';
 
 function ProductDetails() {
 
