@@ -23,6 +23,7 @@ function Home() {
 
             <div className="row col-lg-8 col-xl-7 product-list d-flex justify-content-center" 
                 id="categories-list">
+                    {categories ? <div>Pls wait for the initial push , it only takes 2-3 minutes</div> : null}
                 {(categories) ?  <CategoryItem itemName={'All products'}/> : null}
                 {(categories) ? categories.map((category) => 
                     <CategoryItem 
