@@ -1,4 +1,4 @@
-const apiUrl = 'e-commerce-backend-ivory.vercel.app'
+const apiUrl = import.meta.env.VITE_BASE_URL
 
 export function getAllCategories() {
     return `${apiUrl}/products/categories`;
