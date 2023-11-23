@@ -1,4 +1,4 @@
-const apiUrl = e-commerce-backend-ivory.vercel.app
+const apiUrl = 'e-commerce-backend-ivory.vercel.app'
 
 export function getAllCategories() {
     return `${apiUrl}/products/categories`;
