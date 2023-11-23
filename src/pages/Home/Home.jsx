@@ -23,7 +23,9 @@ function Home() {
 
             <div className="row col-lg-8 col-xl-7 product-list d-flex justify-content-center" 
                 id="categories-list">
-                    {categories ? null :<div className='d-flex justify-content-center'> Please wait for the initial push, it only takes less than a minute...</div> }
+                    {categories ? null :
+                    <div className='d-flex justify-content-center'> Please wait for the initial push , it only takes a minute...
+                    </div> }
                 {(categories) ?  <CategoryItem itemName={'All products'}/> : null}
                 {(categories) ? categories.map((category) => 
                     <CategoryItem 
